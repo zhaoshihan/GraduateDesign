@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为ICommentDao接口方法提供sql语句配置 -->
+<mapper namespace="ssm.dao.ICommentDao">
+
+    <!--    反应数据库comment表select的列名与Bean对象字段的映射关系-->
+    <resultMap id="Comment" type="ssm.entity.Comment">
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="grade" property="grade" jdbcType="TINYINT" />
+        <result column="like" property="like" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!--    对应在数据库中comment表的各列名称-->
+    <sql id="baseColumn">
+        comment.content, comment.grade, comment.like
+    </sql>
+
+    <select id="getCommentById" resultMap="Comment" parameterType="int">
+        SELECT
+            <include refid="baseColumn"></include>
+        FROM
+            comment
+        WHERE
+            comment.id = #{id}
+    </select>
+
+</mapper>

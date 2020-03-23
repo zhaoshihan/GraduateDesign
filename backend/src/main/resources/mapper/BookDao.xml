@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IBookDao接口方法提供sql语句配置 -->
+<mapper namespace="ssm.dao.IBookDao">
+
+    <!--    反应数据库book表select的列名与Bean对象字段的映射关系-->
+    <resultMap id="Book" type="ssm.entity.Book">
+        <result column="profile_path" property="profilePath" jdbcType="VARCHAR" />
+        <result column="file_path" property="filePath" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--    反应数据库comment表select的列名与Bean对象字段的映射关系-->
+    <resultMap id="Comment" type="ssm.entity.Comment">
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="grade" property="grade" jdbcType="TINYINT" />
+        <result column="like" property="like" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="baseBookColumn">
+        book.profile_path, book.file_path
+    </sql>
+
+    <!--    对应在数据库中comment表的各列名称-->
+    <sql id="baseCommentColumn">
+        comment.content, comment.grade, comment.like
+    </sql>
+
+
+    <select id="getBookById" resultMap="Book" parameterType="int">
+        SELECT
+            <include refid="baseBookColumn"></include>
+        FROM
+            book
+        WHERE
+            book.id = #{id}
+    </select>
+
+    <select id="getRelatedCommentsById" resultMap="Comment" parameterType="int">
+        SELECT
+            <include refid="baseCommentColumn"></include>
+        FROM
+            comment
+        WHERE
+            comment.book_id = #{id}
+    </select>
+
+<!--    <select id="getMemberById" resultType="ssm.entity.Member" parameterType="int">select * from member where id = #{id}</select>-->
+<!--    <select id="getMemberByAccount" resultType="ssm.entity.Member" parameterType="String">select * from member where account = #{account}</select>-->
+<!--    <select id="getAllMembers" resultType="ssm.entity.Member">select * from member</select>-->
+<!--    <insert id="addMember" parameterType="ssm.entity.Member">insert into member values (#{id}, #{name}, #{gender}, #{city}, #{address}, #{postCode}, #{phoneNumber}, #{email}, #{account}, #{password})</insert>-->
+<!--    <update id="updateMember" parameterType="ssm.entity.Member">-->
+<!--        update member set name = #{name}, gender = #{gender}, city = #{city}, address = #{address},-->
+<!--                          postcode = #{postCode}, phonenumber = #{phoneNumber}, email = #{email},-->
+<!--                          account = #{account}, password = #{password}-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+<!--    <delete id="deleteMember" parameterType="ssm.entity.Member">delete from member where id = #{id}</delete>-->
+
+</mapper>

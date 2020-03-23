@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为IMemberDao接口方法提供sql语句配置 -->
+<mapper namespace="ssm.dao.IMemberDao">
+
+<!--    反应数据库member表select的列名与Bean对象字段的映射关系-->
+    <resultMap id="Member" type="ssm.entity.Member">
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="profile_path" property="profilePath" jdbcType="VARCHAR" />
+    </resultMap>
+
+<!--    对应在数据库中member表的各列名称-->
+    <sql id="baseColumn">
+        member.user_name, member.password, member.nick_name, member.profile_path
+    </sql>
+
+<!--    这里的#{id}对应IMemberDao对象getMemberById方法的int id传入参数-->
+    <select id="getMemberById" resultMap="Member" parameterType="int">
+        SELECT
+            <include refid="baseColumn"></include>
+        FROM
+            member
+        WHERE
+            member.id = #{id}
+    </select>
+
+    <select id="getMemberByUsername" resultMap="Member" parameterType="String">
+        SELECT
+            <include refid="baseColumn"></include>
+        FROM
+            member
+        WHERE
+            member.user_name = #{username}
+    </select>
+
+
+
+</mapper>
