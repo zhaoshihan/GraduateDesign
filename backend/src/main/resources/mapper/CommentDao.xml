@@ -22,7 +22,9 @@
         FROM
             comment
         WHERE
-            comment.id = #{id}
+                comment.book_id = #{bookId}
+            AND
+                comment.user_id = #{userId}
     </select>
 
 </mapper>

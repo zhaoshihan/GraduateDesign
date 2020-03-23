@@ -3,6 +3,6 @@ package ssm.service;
 import ssm.entity.Comment;
 
 public interface ICommentService {
-    public Comment getCommentById(int id);
+    public Comment getCommentById(int bookId, int userId);
 
 }

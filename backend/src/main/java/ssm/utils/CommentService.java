@@ -12,8 +12,8 @@ public class CommentService implements ICommentService {
     private ICommentDao commentDao;
 
     @Override
-    public Comment getCommentById(int id) {
-        return commentDao.getCommentById(id);
+    public Comment getCommentById(int bookId, int userId) {
+        return commentDao.getCommentById(bookId, userId);
     }
 
 }

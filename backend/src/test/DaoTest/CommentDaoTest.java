@@ -21,10 +21,10 @@ public class CommentDaoTest {
 
     @Test
     public void testSelect() {
-        Comment comment = commentDao.getCommentById(1);
+        Comment comment = commentDao.getCommentById(1, 1);
         assertEquals(comment.getGrade(), 2);
 
-        comment = commentDao.getCommentById(2);
+        comment = commentDao.getCommentById(1, 2);
         assertEquals(comment.getContent(), "another test for content");
     }
 }
