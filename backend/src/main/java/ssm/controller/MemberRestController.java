@@ -1,41 +1,40 @@
 package ssm.controller;
 
 import ssm.entity.Member;
-import ssm.service.IMemberService;
+import ssm.utils.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Base64;
-import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("/member")
 @CrossOrigin(origins = "*")
 public class MemberRestController {
     @Resource
-    private IMemberService memberService;
+    private MemberService memberService;
 
-    private String[] getFromBASE64(String authorization){
-        if (authorization != null && authorization.toLowerCase().startsWith("basic")) {
-            // Authorization: Basic base64credentials
-            String base64Credentials = authorization.substring("Basic".length()).trim();
-            byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
-            String credentials = new String(credDecoded, StandardCharsets.UTF_8);
-            // credentials = username:password
-            return credentials.split(":", 2);
-        }
-        else return null;
-    }
+//    private String[] getFromBASE64(String authorization){
+//        if (authorization != null && authorization.toLowerCase().startsWith("basic")) {
+//            // Authorization: Basic base64credentials
+//            String base64Credentials = authorization.substring("Basic".length()).trim();
+//            byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
+//            String credentials = new String(credDecoded, StandardCharsets.UTF_8);
+//            // credentials = username:password
+//            return credentials.split(":", 2);
+//        }
+//        else return null;
+//    }
 
-    @RequestMapping(value = "/check", method = RequestMethod.PUT)
-    public ResponseEntity<Member> checkMember(@RequestHeader("Authorization") String auth){
-        String[] values = getFromBASE64(auth);
-        if (values != null){
-            String username = values[0];
-            String password = values[1];
+    @RequestMapping(value = "/check", method = RequestMethod.POST)
+    public ResponseEntity<Member> checkMember(@RequestBody Member member){
+        System.out.println("in check method");
+
+        if (member != null){
+            String username = member.getUserName();
+            String password = member.getPassword();
+
             Member memberExist = this.memberService.getMemberByUsername(username);
             if(memberExist != null && password.equals(memberExist.getPassword())){
                 memberExist.setUserName(null);
