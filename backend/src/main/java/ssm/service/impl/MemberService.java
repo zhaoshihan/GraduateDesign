@@ -1,4 +1,4 @@
-package ssm.utils;
+package ssm.service.impl;
 import org.springframework.stereotype.Service;
 import ssm.dao.IMemberDao;
 import ssm.entity.Member;

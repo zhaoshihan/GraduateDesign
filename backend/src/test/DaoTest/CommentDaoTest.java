@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring-mybatis.xml"})
+@ContextConfiguration({"classpath:old_config/spring-mybatis.xml"})
 @Transactional
 public class CommentDaoTest {
     @Autowired

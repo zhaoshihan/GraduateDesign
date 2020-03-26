@@ -1,7 +1,7 @@
 package ssm.controller;
 
 import ssm.entity.Member;
-import ssm.utils.MemberService;
+import ssm.service.IMemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 @CrossOrigin(origins = "*")
 public class MemberRestController {
     @Resource
-    private MemberService memberService;
+    private IMemberService memberService;
 
 //    private String[] getFromBASE64(String authorization){
 //        if (authorization != null && authorization.toLowerCase().startsWith("basic")) {

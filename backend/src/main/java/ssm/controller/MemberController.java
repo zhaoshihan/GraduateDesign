@@ -1,7 +1,7 @@
 package ssm.controller;
 
 import ssm.entity.Member;
-import ssm.utils.MemberService;
+import ssm.service.IMemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 @RequestMapping("")
 public class MemberController {
     @Resource
-    private MemberService memberService;
+    private IMemberService memberService;
 
     @RequestMapping("/findMember")
     public String findMember(Model model){

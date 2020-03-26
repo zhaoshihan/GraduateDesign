@@ -16,7 +16,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring-mybatis.xml"})
+@ContextConfiguration({"classpath:old_config/spring-mybatis.xml"})
 @Transactional
 public class BookDaoTest {
     @Autowired
