@@ -1,12 +1,21 @@
 package ssm.entity;
 
 public class Member {
+    private int id;
     private String userName;
-    private String password;
+    private String passWord;
     private String nickName;
     private String profilePath;
 
     public Member() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -17,12 +26,12 @@ public class Member {
         this.userName = user_name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassWord() {
+        return passWord;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
     public String getNickName() {
@@ -45,7 +54,7 @@ public class Member {
     public String toString() {
         return "Member{" +
                 "userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
+                ", passWord='" + passWord + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", profilePath='" + profilePath + '\'' +
                 '}';

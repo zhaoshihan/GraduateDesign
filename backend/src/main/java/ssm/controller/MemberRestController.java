@@ -27,23 +27,18 @@ public class MemberRestController {
 //        else return null;
 //    }
 
-    @RequestMapping(value = "/check", method = RequestMethod.POST)
-    public ResponseEntity<Member> checkMember(@RequestBody Member member){
-        System.out.println("in check method");
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity memberLogin(@RequestBody Member member){
+        if(memberService.memberExist(member)){
+            System.out.println("member exist");
 
-        if (member != null){
-            String username = member.getUserName();
-            String password = member.getPassword();
-
-            Member memberExist = this.memberService.getMemberByUsername(username);
-            if(memberExist != null && password.equals(memberExist.getPassword())){
-                memberExist.setUserName(null);
-                memberExist.setPassword(null);
-                return new ResponseEntity<>(memberExist, HttpStatus.OK);
+            String token = memberService.signToken(member);
+            if (token != null) {
+                return new ResponseEntity<>(token, HttpStatus.OK);
             }
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        else return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value="/query/{id}", method= RequestMethod.GET)

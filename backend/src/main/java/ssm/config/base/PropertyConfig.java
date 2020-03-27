@@ -1,4 +1,4 @@
-package ssm.config;
+package ssm.config.base;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

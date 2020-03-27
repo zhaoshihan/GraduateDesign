@@ -2,15 +2,16 @@ package ssm.config;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import ssm.config.base.PropertyConfig;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -19,11 +20,11 @@ import java.io.IOException;
 /**
  * 相当于原先的spring-mybatis.xml配置文件
  */
-@Configuration //表明此类是配置类
+//表明此类是配置类
+@Configuration
 @ComponentScan(
-        basePackages = "ssm.*",
-        excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Controller.class)}
-        ) // 扫描除Controller以外的组件
+        basePackages = {"ssm.config.base","ssm.service"}
+)
 @EnableTransactionManagement //开启事务管理
 public class AppConfig {
     @Bean

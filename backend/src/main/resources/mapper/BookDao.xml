@@ -48,11 +48,11 @@
 <!--    <select id="getMemberById" resultType="ssm.entity.Member" parameterType="int">select * from member where id = #{id}</select>-->
 <!--    <select id="getMemberByAccount" resultType="ssm.entity.Member" parameterType="String">select * from member where account = #{account}</select>-->
 <!--    <select id="getAllMembers" resultType="ssm.entity.Member">select * from member</select>-->
-<!--    <insert id="addMember" parameterType="ssm.entity.Member">insert into member values (#{id}, #{name}, #{gender}, #{city}, #{address}, #{postCode}, #{phoneNumber}, #{email}, #{account}, #{password})</insert>-->
+<!--    <insert id="addMember" parameterType="ssm.entity.Member">insert into member values (#{id}, #{name}, #{gender}, #{city}, #{address}, #{postCode}, #{phoneNumber}, #{email}, #{account}, #{passWord})</insert>-->
 <!--    <update id="updateMember" parameterType="ssm.entity.Member">-->
 <!--        update member set name = #{name}, gender = #{gender}, city = #{city}, address = #{address},-->
 <!--                          postcode = #{postCode}, phonenumber = #{phoneNumber}, email = #{email},-->
-<!--                          account = #{account}, password = #{password}-->
+<!--                          account = #{account}, passWord = #{passWord}-->
 <!--        where id = #{id}-->
 <!--    </update>-->
 <!--    <delete id="deleteMember" parameterType="ssm.entity.Member">delete from member where id = #{id}</delete>-->

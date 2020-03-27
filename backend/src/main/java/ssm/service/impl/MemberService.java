@@ -3,6 +3,7 @@ import org.springframework.stereotype.Service;
 import ssm.dao.IMemberDao;
 import ssm.entity.Member;
 import ssm.service.IMemberService;
+import ssm.util.TokenUtil;
 
 import javax.annotation.Resource;
 
@@ -20,6 +21,35 @@ public class MemberService implements IMemberService {
     public Member getMemberByUsername(String username) {
         return memberDao.getMemberByUsername(username);
     }
+
+    @Override
+    public boolean memberExist(Member member) {
+        String username = member.getUserName();
+        String password = member.getPassWord();
+
+        Member existMember = memberDao.getMemberByUsername(username);
+        return existMember != null && password.equals(existMember.getPassWord());
+    }
+
+    @Override
+    public String signToken(Member member) {
+        if (member != null) {
+            String username = member.getUserName();
+            String password = member.getPassWord();
+
+            return TokenUtil.sign(username, password);
+        }
+        return null;
+    }
+
+    @Override
+    public String getUserNameFromToken(String token) {
+        if (TokenUtil.verify(token)) {
+            return TokenUtil.getUserName(token);
+        }
+        return null;
+    }
+
 
 //    @Override
 //    public Member getMemberByAccount(String account){

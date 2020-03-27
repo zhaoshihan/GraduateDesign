@@ -34,6 +34,19 @@
             <version>7.0</version>
         </dependency>
 
+        <!--JSTL 解析JSP标签-->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
         <!-- 单元测试 -->
         <dependency>
             <groupId>junit</groupId>
@@ -57,6 +70,12 @@
             <version>2.9.10.3</version>
         </dependency>
 
+        <!-- java-jwt 用于进行用户登陆的token验证 -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.10.1</version>
+        </dependency>
 
         <!-- 数据库 -->
         <dependency>
@@ -127,13 +146,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
-        </dependency>
-
-        <!--JSTL 解析JSP标签-->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
         </dependency>
     </dependencies>
 

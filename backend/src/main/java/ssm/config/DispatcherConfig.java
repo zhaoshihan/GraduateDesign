@@ -16,21 +16,27 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import ssm.config.base.PropertyConfig;
+import ssm.controller.interceptor.TokenInterceptor;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Properties;
+import java.util.*;
 
 /**
  *  对应于原先的spring-mvc.xml配置文件
  */
 @Configuration
-@ComponentScan(basePackages = {"ssm.config", "ssm.controller"})
+
+@ComponentScan(
+        basePackages = {"ssm.config.base", "ssm.controller"}
+) // 只扫描controller类
 @EnableWebMvc
 public class DispatcherConfig implements WebMvcConfigurer {
 
     @Autowired
     private PropertyConfig propertyConfig;
+
+    @Autowired
+    private TokenInterceptor tokenInterceptor;
 
     /**
      * 相当于<mvc:annotation-driven/>的一部分，注册DefaultAnnotationHandlerMapping
@@ -174,6 +180,9 @@ public class DispatcherConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-
+        // 添加TokenInterceptor拦截器
+        // 设置除登陆页面外，其他的都要先执行拦截器
+        List<String> excludePath = new ArrayList<>(Collections.singletonList("/member/login"));
+        registry.addInterceptor(tokenInterceptor).excludePathPatterns(excludePath);
     }
 }
