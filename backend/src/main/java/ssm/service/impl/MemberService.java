@@ -23,10 +23,7 @@ public class MemberService implements IMemberService {
     }
 
     @Override
-    public boolean memberExist(Member member) {
-        String username = member.getUserName();
-        String password = member.getPassWord();
-
+    public boolean memberExist(String username, String password) {
         Member existMember = memberDao.getMemberByUsername(username);
         return existMember != null && password.equals(existMember.getPassWord());
     }

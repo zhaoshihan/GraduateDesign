@@ -29,8 +29,9 @@ public class MemberDaoTest {
     {
         Member member = memberDao.getMemberById(1);
         assertEquals(member.getUserName(),"test_user_name");
+
         member = memberDao.getMemberByUsername("test_user_name");
-        assertEquals(member.getPassWord(), "123456");
+        assertEquals(member.getNickName(), "test_nick_name");
     }
 
 //    @Test

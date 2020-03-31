@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/member")
@@ -28,13 +30,18 @@ public class MemberRestController {
 //    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity memberLogin(@RequestBody Member member){
-        if(memberService.memberExist(member)){
-            System.out.println("member exist");
+    public ResponseEntity memberLogin(@RequestParam("userName") String username,
+                                      @RequestParam("passWord") String password){
+        if(memberService.memberExist(username, password)){
+            Member member = memberService.getMemberByUsername(username);
 
             String token = memberService.signToken(member);
             if (token != null) {
-                return new ResponseEntity<>(token, HttpStatus.OK);
+                Map<String, String> body = new HashMap<>(2, 1.0f);
+                body.put("token", token);
+                body.put("userNickname", member.getNickName());
+
+                return new ResponseEntity<>(body, HttpStatus.OK);
             }
             else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

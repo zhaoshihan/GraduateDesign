@@ -36,22 +36,21 @@ export default {
   },
   methods: {
     login: function () {
-      // this.postData = {
-      //   username: this.getUserName(),
-      //   password: this.getPasswordMD5()
-      // }
-
       console.log(this.loginForm)
 
-      this.$axios.post('/member/login', this.loginForm)
-        .then(response => {
-          console.log('in then method')
-          console.log(response.data)
-        })
-        .catch(error => {
-          console.warn('in catch method')
-          console.warn(error)
-        })
+      this.$axios({
+        method: 'post',
+        url: '/member/login',
+        params: this.loginForm
+        // data: this.loginForm
+      }).then(response => {
+        console.log(response.data)
+        this.$store.commit('logIn', response.data)
+        this.$router.push('/home')
+      }).catch(error => {
+        console.warn('in catch method')
+        console.warn(error)
+      })
 
       // Axios({
       //   method: 'post',

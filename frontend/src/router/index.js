@@ -5,14 +5,21 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import Home from '../views/Home'
 
+import store from '../store/user'
+import Axios from 'axios'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    redirect: '/login'
+  },
+  {
+    path: '/login',
     name: 'Login',
     meta: {
-      title: '登陆'
+      title: '登陆页',
+      requireAuth: false
     },
     component: Login
   },
@@ -20,7 +27,8 @@ const routes = [
     path: '/home',
     name: 'Home',
     meta: {
-      title: '主页'
+      title: '主页',
+      requireAuth: true
     },
     component: Home
   }
@@ -38,13 +46,52 @@ const router = new VueRouter({
   routes
 })
 
+// router.beforeEach(function (transition) {
+//   console.log(transition.to)
+//   const vm = transition.to.app.$root
+//   if (transition.to.meta.requireAuth) {
+//     vm.$axios.create({
+//       method: 'post',
+//       url: '/token/check',
+//       auth: vm.$store.state.tokens
+//     }).then(response => {
+//       console.log(response)
+//       transition.next()
+//     }).catch(error => {
+//       console.log(error)
+//       transition.next('/login')
+//     })
+//   } else {
+//     transition.next()
+//   }
+// })
+//
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title
-  next()
+  if (to.meta.requireAuth) {
+    // console.log(store.state)
+    // console.log('current token is' + store.state.token)
+    const axiosInstance = Axios.create({
+      baseURL: 'http://localhost:8081',
+      headers: {
+        auth_token: store.state.token
+      }
+    })
+    axiosInstance.post('/token/check', null
+    ).then(response => {
+      console.log(response)
+      next()
+    }).catch(error => {
+      console.warn(error)
+      next({ path: '/login' })
+    })
+  } else {
+    next()
+  }
 })
 
-router.afterEach((to, from, next) => {
-  window.scrollTo(0, 0)
-})
+// router.afterEach((to, from, next) => {
+//   window.scrollTo(0, 0)
+// })
 
 export default router
