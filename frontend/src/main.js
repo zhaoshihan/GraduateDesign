@@ -12,7 +12,32 @@ import md5 from 'js-md5'
 
 // Axios.defaults.headers.post['Content-Type'] = 'application/json'
 // Axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+// 为Axios进行统一的config设置
 Axios.defaults.baseURL = 'http://localhost:8081'
+
+// 为Axios添加请求拦截器和响应拦截器，统一进行错误处理（免去逐个使用catch）
+Axios.interceptors.request.use(
+  config => {
+    if (window.localStorage.token) {
+      // 如果token值不为空，则自动添加入request headers中
+      config.headers.Authorization = window.localStorage.token
+    }
+    return config
+  }, error => {
+    // 统一处理请求错误，以4xx状态码开头，表示客户端错误
+    console.warn(error)
+    return Promise.reject(error)
+  }
+)
+Axios.interceptors.response.use(
+  config => {
+    return config
+  }, error => {
+    // 响应错误，以5xx状态码开头，表示服务端错误
+    console.warn(error)
+    return Promise.reject(error)
+  }
+)
 
 Vue.use(BootrapVue)
 

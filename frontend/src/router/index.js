@@ -5,8 +5,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login'
 import Home from '../views/Home'
 
-import store from '../store/user'
-import Axios from 'axios'
+// import store from '../store/user'
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,45 +45,32 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach(function (transition) {
-//   console.log(transition.to)
-//   const vm = transition.to.app.$root
-//   if (transition.to.meta.requireAuth) {
-//     vm.$axios.create({
-//       method: 'post',
-//       url: '/token/check',
-//       auth: vm.$store.state.tokens
-//     }).then(response => {
-//       console.log(response)
-//       transition.next()
-//     }).catch(error => {
-//       console.log(error)
-//       transition.next('/login')
-//     })
-//   } else {
-//     transition.next()
-//   }
-// })
-//
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title
   if (to.meta.requireAuth) {
-    // console.log(store.state)
-    // console.log('current token is' + store.state.token)
-    const axiosInstance = Axios.create({
-      baseURL: 'http://localhost:8081',
-      headers: {
-        auth_token: store.state.token
-      }
-    })
-    axiosInstance.post('/token/check', null
-    ).then(response => {
-      console.log(response)
+    console.log('current localstorage token = ' + window.localStorage.token)
+    if (window.localStorage.token) {
+      console.log('token exist')
       next()
-    }).catch(error => {
-      console.warn(error)
+    } else {
+      console.log('token not exist')
       next({ path: '/login' })
-    })
+    }
+    // const axiosInstance = Axios.create({
+    //   baseURL: 'http://localhost:8081',
+    //   headers: {
+    //     Auth_Token: store.state.token
+    //   }
+    // })
+    // // 这个后端接口是空的
+    // axiosInstance.post('/token/check', null
+    // ).then(response => {
+    //   console.log(response)
+    //   next()
+    // }).catch(error => {
+    //   console.warn(error)
+    //   next({ path: '/login' })
+    // })
   } else {
     next()
   }

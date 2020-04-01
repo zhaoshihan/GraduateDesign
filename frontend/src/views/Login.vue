@@ -41,15 +41,13 @@ export default {
       this.$axios({
         method: 'post',
         url: '/member/login',
-        params: this.loginForm
-        // data: this.loginForm
+        data: this.loginForm
       }).then(response => {
         console.log(response.data)
-        this.$store.commit('logIn', response.data)
+        // this.$store.commit('logIn', response.data)
+        window.localStorage.token = response.data.token
+        window.localStorage.userNickname = response.data.userNickname
         this.$router.push('/home')
-      }).catch(error => {
-        console.warn('in catch method')
-        console.warn(error)
       })
 
       // Axios({
