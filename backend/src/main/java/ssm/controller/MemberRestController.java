@@ -30,10 +30,12 @@ public class MemberRestController {
 //    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity memberLogin(@RequestParam("userName") String username,
-                                      @RequestParam("passWord") String password){
+    public ResponseEntity memberLogin(@RequestBody Member member){
+        String username = member.getUserName();
+        String password = member.getPassWord();
+
         if(memberService.memberExist(username, password)){
-            Member member = memberService.getMemberByUsername(username);
+            member = memberService.getMemberByUsername(username);
 
             String token = memberService.signToken(member);
             if (token != null) {
