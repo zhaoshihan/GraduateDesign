@@ -75,7 +75,7 @@ public class DispatcherConfig implements WebMvcConfigurer {
         // 设置除登陆页面外，其他的都要先执行拦截器
         registry.addInterceptor(new TokenInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/member/login");
+                .excludePathPatterns("/member/login", "/member/register");
     }
 
 //    @Bean

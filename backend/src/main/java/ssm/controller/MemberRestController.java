@@ -50,14 +50,22 @@ public class MemberRestController {
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value="/query/{id}", method= RequestMethod.GET)
-    public ResponseEntity<Member> getMemberById(@PathVariable("id") int id) {
-        Member member = this.memberService.getMemberById(id);
-        if (member != null) {
-            return new ResponseEntity<>(member, HttpStatus.OK);
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity memberRegister(@RequestBody Member member){
+        if (memberService.addMember(member)) {
+            return new ResponseEntity(HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        else return new ResponseEntity(HttpStatus.CONFLICT);
     }
+
+//    @RequestMapping(value="/query/{id}", method= RequestMethod.GET)
+//    public ResponseEntity<Member> getMemberById(@PathVariable("id") int id) {
+//        Member member = this.memberService.getMemberById(id);
+//        if (member != null) {
+//            return new ResponseEntity<>(member, HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
 
 //    @RequestMapping(value = "/query/all",method = RequestMethod.GET)
 //    public ResponseEntity<List<Member>> getAllMembers(){

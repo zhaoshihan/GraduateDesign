@@ -37,6 +37,16 @@
             member.user_name = #{username}
     </select>
 
+<!--    返回值int仍然为插入影响的行数，数据库内部自增id值被封装到参数对象中-->
+    <insert id="addMember" parameterType="ssm.entity.Member"
+            useGeneratedKeys="true" keyProperty="member.id">
+        INSERT INTO
+            member
+            (user_name, password, nick_name)
+        VALUES
+            (#{member.userName}, #{member.passWord}, #{member.nickName})
+    </insert>
+
 
 
 </mapper>

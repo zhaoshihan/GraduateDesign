@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 // @ is an alias to /src
-import Login from '../views/Login'
+// import Register from '../views/Register'
+// import Login from '../views/Login'
 import Home from '../views/Home'
 
 // import store from '../store/user'
@@ -20,7 +21,16 @@ const routes = [
       title: '登陆页',
       requireAuth: false
     },
-    component: Login
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    meta: {
+      title: '注册页',
+      requireAuth: false
+    },
+    component: () => import('../views/Register.vue')
   },
   {
     path: '/home',

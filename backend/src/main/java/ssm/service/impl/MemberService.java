@@ -13,7 +13,7 @@ public class MemberService implements IMemberService {
     private IMemberDao memberDao;
 
     @Override
-    public Member getMemberById(int id){
+    public Member getMemberById(int id) {
         return memberDao.getMemberById(id);
     }
 
@@ -45,6 +45,11 @@ public class MemberService implements IMemberService {
             return TokenUtil.getUserName(token);
         }
         return null;
+    }
+
+    @Override
+    public boolean addMember(Member member) {
+        return memberDao.addMember(member) > 0;
     }
 
 

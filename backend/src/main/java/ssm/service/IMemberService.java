@@ -13,6 +13,8 @@ public interface IMemberService {
 
     public String getUserNameFromToken(String token);
 
+    public boolean addMember(Member member);
+
 //    public Member getMemberByAccount(String account);
 //    public List<Member> getAllMembers();
 //    public boolean addMember(Member member);

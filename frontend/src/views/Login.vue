@@ -1,15 +1,23 @@
 <template>
-  <form v-bind:model="loginForm" v-on:submit.prevent>
-    <label>Username:</label>
-    <input type="text" v-model="loginForm.userName" name="username" id="username">
-    <br>
-    <p>current username = {{loginForm.userName}}</p>
-    <label>Password:</label>
-    <input type="password" v-model="loginForm.passWord" name="password" id="password">
-    <br>
-    <p>current password = {{loginForm.passWord}}</p>
-    <button v-on:click="login">submit</button>
-  </form>
+  <div class="login">
+    <div id="nav">
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Register</router-link>
+    </div>
+
+    <p>Login Vue</p>
+    <form v-bind:model="loginForm" v-on:submit.prevent>
+      <label>Username:</label>
+      <input type="text" v-model="loginForm.userName" name="username" id="username">
+      <br>
+      <p>current username = {{loginForm.userName}}</p>
+      <label>Password:</label>
+      <input type="password" v-model="loginForm.passWord" name="password" id="password">
+      <br>
+      <p>current password = {{loginForm.passWord}}</p>
+      <button v-on:click="login">Login</button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -80,6 +88,17 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  #nav {
+    padding: 30px;
 
+    a {
+      font-weight: bold;
+      color: #2c3e50;
+
+      &.router-link-exact-active {
+        color: #42b983;
+      }
+    }
+  }
 </style>
