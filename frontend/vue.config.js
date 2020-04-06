@@ -1,5 +1,11 @@
 const webpack = require('webpack')
+
 module.exports = {
+  // assetsDir: 'static',
+};
+
+
+// module.exports = {
   // configureWebpack: {
   //   plugins: [
   //     new webpack.ProvidePlugin({
@@ -19,4 +25,4 @@ module.exports = {
   //     }
   //   }
   // }
-}
+// }

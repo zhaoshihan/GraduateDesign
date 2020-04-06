@@ -3,9 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import BootrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.min.css'
+// import BootrapVue from 'bootstrap-vue'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.min.css'
+import '@/assets/styles/icon.css'
+import '@/assets/styles/global.scss'
+// import 'src/assets/styles/icon.css'
+// import 'src/assets/styles/global.scss'
 
 import Axios from 'axios'
 import md5 from 'js-md5'
@@ -39,7 +43,7 @@ Axios.interceptors.response.use(
   }
 )
 
-Vue.use(BootrapVue)
+// Vue.use(BootrapVue)
 
 // 将Axios与Vue实例绑定
 Vue.prototype.$axios = Axios

@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 // import Register from '../views/Register'
 // import Login from '../views/Login'
 import Home from '../views/Home'
+import Ebook from '../views/Ebook'
 
 // import store from '../store/user'
 Vue.use(VueRouter)
@@ -40,6 +41,15 @@ const routes = [
       requireAuth: true
     },
     component: Home
+  },
+  {
+    path: '/ebook',
+    name: 'Ebook',
+    meta: {
+      title: '电子书页',
+      requireAuth: true
+    },
+    component: Ebook
   }
   // {
   //   path: '/about',

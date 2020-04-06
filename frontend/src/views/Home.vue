@@ -4,6 +4,8 @@
     <p>current token = {{token}}</p>
     <p>current user nickname = {{userNickname}}</p>
 
+    <button><router-link to="/ebook">Ebook1</router-link></button>
+
     <img alt="Vue logo" src="../assets/logo.png">
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
   </div>
