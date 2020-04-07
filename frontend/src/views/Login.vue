@@ -1,22 +1,47 @@
 <template>
-  <div class="login">
-    <div id="nav">
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link>
+  <div class="container text-center">
+    <div class="row justify-content-center align-items-center" style="height:100vh">
+      <div class="col-4">
+        <div id="nav">
+          <router-link to="/login">Login</router-link> |
+          <router-link to="/register">Register</router-link>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3 class="h3 mb-3 font-weight-normal">Please sign in</h3>
+          </div>
+          <div class="card-body">
+            <form :model="loginForm" @submit.prevent>
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" class="form-control" v-model="loginForm.userName" placeholder="username">
+              </div>
+              <div class="input-group form-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                </div>
+                <input type="password" class="form-control" v-model="loginForm.passWord" placeholder="password">
+              </div>
+              <div class="form-group">
+                <div class="checkbox mb-3">
+                  <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block" @click="login">Sign in</button>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            <span class="mt-5 mb-3 text-muted">&copy; 2017-2020</span>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <p>Login Vue</p>
-    <form v-bind:model="loginForm" v-on:submit.prevent>
-      <label>Username:</label>
-      <input type="text" v-model="loginForm.userName" name="username" id="username">
-      <br>
-      <p>current username = {{loginForm.userName}}</p>
-      <label>Password:</label>
-      <input type="password" v-model="loginForm.passWord" name="password" id="password">
-      <br>
-      <p>current password = {{loginForm.passWord}}</p>
-      <button v-on:click="login">Login</button>
-    </form>
   </div>
 </template>
 
