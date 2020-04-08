@@ -32,8 +32,6 @@ import MenuBar from '../components/MenuBar'
 import Epub from 'epubjs'
 const DOWNLOAD_URL = '/static/2018_Book_AgileProcessesInSoftwareEngine.epub'
 
-// this.$router.global.epub = Epub
-// global.ePub = Epub
 export default {
   components: {
     TitleBar,

@@ -3,13 +3,16 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import BootrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.min.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.min.css'
 import '@/assets/styles/icon.css'
 import '@/assets/styles/global.scss'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 
+// 引入bootstrap.js 为了nav-bar的隐藏/展开操作
+import 'bootstrap'
+import 'popper.js'
+import BootrapVue from 'bootstrap-vue'
 import Axios from 'axios'
 import md5 from 'js-md5'
 
