@@ -1,68 +1,25 @@
 package ssm.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
-import ssm.config.base.PropertyConfig;
 import ssm.controller.interceptor.TokenInterceptor;
 
-import java.util.*;
 
 /**
+ *  Spring MVC Dispatcher Servlet 配置类
+ *
  *  对应于原先的spring-mvc.xml配置文件
  */
 @Configuration
 @ComponentScan(
-        basePackages = {"ssm.config.base", "ssm.controller"}
+        basePackages = {"ssm.controller"}
 ) // 只扫描controller类
 @EnableWebMvc
 public class DispatcherConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private PropertyConfig propertyConfig;
-
-    /**
-     * 配置jsp 显示ViewResolver
-     *
-     * @return
-     */
-    @Bean
-    public InternalResourceViewResolver internalResourceViewResolver() {
-        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
-        internalResourceViewResolver.setViewClass(JstlView.class);
-        internalResourceViewResolver.setPrefix(propertyConfig.getWebViewPrefix());
-        internalResourceViewResolver.setSuffix(propertyConfig.getWebViewSuffix());
-        return internalResourceViewResolver;
-    }
-
-    /**
-     * 设置统一错误处理要跳转的视图
-     *
-     * @return
-     */
-    @Bean
-    public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
-        SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
-        Properties properties = new Properties();
-        properties.getProperty("java.lang.Exception", "error");
-        simpleMappingExceptionResolver.setExceptionMappings(properties);
-        return simpleMappingExceptionResolver;
-    }
-
-    /**
-     * 添加静态资源
-     *
-     * @param registry
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(propertyConfig.getWebStaticHandler()).addResourceLocations(propertyConfig.getWebStaticResource()).setCachePeriod(propertyConfig.getWebStaticCachedPeriod());
-    }
+//    @Autowired
+//    private PropertyConfig propertyConfig;
 
     /**
      * 添加拦截器
@@ -77,6 +34,45 @@ public class DispatcherConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/member/login", "/member/register");
     }
+
+    /**
+     * 配置jsp 显示ViewResolver
+     *
+     * @return
+     */
+//    @Bean
+//    public InternalResourceViewResolver internalResourceViewResolver() {
+//        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
+//        internalResourceViewResolver.setViewClass(JstlView.class);
+//        internalResourceViewResolver.setPrefix(propertyConfig.getWebViewPrefix());
+//        internalResourceViewResolver.setSuffix(propertyConfig.getWebViewSuffix());
+//        return internalResourceViewResolver;
+//    }
+
+    /**
+     * 设置统一错误处理要跳转的视图
+     *
+     * @return
+     */
+//    @Bean
+//    public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
+//        SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
+//        Properties properties = new Properties();
+//        properties.getProperty("java.lang.Exception", "error");
+//        simpleMappingExceptionResolver.setExceptionMappings(properties);
+//        return simpleMappingExceptionResolver;
+//    }
+
+    /**
+     * 添加静态资源
+     *
+     * @param registry
+     */
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler(propertyConfig.getWebStaticHandler()).addResourceLocations(propertyConfig.getWebStaticResource()).setCachePeriod(propertyConfig.getWebStaticCachedPeriod());
+//    }
+
 
 //    @Bean
 //    public TokenInterceptor getTokenHeader(){

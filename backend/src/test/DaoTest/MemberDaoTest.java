@@ -33,21 +33,22 @@ public class MemberDaoTest {
         assertEquals(member.getNickName(), "test_nick_name");
     }
 
-    @Test
-    public void testAddMember() {
-        Member member = new Member();
-        member.setUserName("zhangsan");
-        member.setPassWord("123456");
-        member.setNickName("nick_zhangsan");
+//    @Test
+//    public void testAddMember() {
+//        Member member = new Member();
+//        member.setUserName("zhangsan");
+//        member.setPassWord("123456");
+//        member.setNickName("nick_zhangsan");
+//
+//        int influence_row = memberDao.addMember(member);
+//        assertEquals(influence_row, 1);
+//
+//        int new_id = member.getId();
+//
+//        member = memberDao.getMemberById(new_id);
+//        assertEquals(member.getUserName(), "zhangsan");
+//    }
 
-        int influence_row = memberDao.addMember(member);
-        assertEquals(influence_row, 1);
-
-        int new_id = member.getId();
-
-        member = memberDao.getMemberById(new_id);
-        assertEquals(member.getUserName(), "zhangsan");
-    }
 //    @Test
 //    public void testGetAll(){
 //        List<Member> members = memberDao.getAllMembers();

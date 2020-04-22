@@ -2,8 +2,10 @@ package ssm.dao;
 
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import ssm.entity.Member;
 
+@Repository
 public interface IMemberDao {
     Member getMemberById(@Param("id") int id);
     Member getMemberByUsername(@Param("username") String username);
