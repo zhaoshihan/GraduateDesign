@@ -1,5 +1,5 @@
 package ssm.service;
-import ssm.entity.Member;
+import ssm.dao.entity.Member;
 
 public interface IMemberService {
 

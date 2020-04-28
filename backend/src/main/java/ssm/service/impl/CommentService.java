@@ -1,7 +1,7 @@
 package ssm.service.impl;
 import org.springframework.stereotype.Service;
 import ssm.dao.ICommentDao;
-import ssm.entity.Comment;
+import ssm.dao.entity.Comment;
 import ssm.service.ICommentService;
 
 import javax.annotation.Resource;

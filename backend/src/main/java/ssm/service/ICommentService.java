@@ -1,6 +1,6 @@
 package ssm.service;
 
-import ssm.entity.Comment;
+import ssm.dao.entity.Comment;
 
 public interface ICommentService {
     public Comment getCommentById(int bookId, int userId);

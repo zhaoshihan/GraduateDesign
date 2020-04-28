@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.AnnotationConfigWebContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
 import ssm.config.AppConfig;
-import ssm.entity.Member;
+import ssm.dao.entity.Member;
 import ssm.service.IMemberService;
 import ssm.util.TokenUtil;
 
@@ -30,8 +30,8 @@ public class MemberServiceTest {
     @Test
     public void signTokenTest() {
         Member member = new Member();
-        member.setUserName("test_user_name");
-        member.setPassWord("123456");
+        member.setUsername("test_user_name");
+        member.setPassword("123456");
         String token = memberService.signToken(member);
         assertNotEquals(token, null);
 

@@ -1,7 +1,7 @@
 package ssm.service;
 
-import ssm.entity.Book;
-import ssm.entity.Comment;
+import ssm.dao.entity.Book;
+import ssm.dao.entity.Comment;
 
 import java.util.List;
 

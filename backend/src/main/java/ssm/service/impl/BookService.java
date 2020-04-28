@@ -2,8 +2,8 @@ package ssm.service.impl;
 
 import org.springframework.stereotype.Service;
 import ssm.dao.IBookDao;
-import ssm.entity.Book;
-import ssm.entity.Comment;
+import ssm.dao.entity.Book;
+import ssm.dao.entity.Comment;
 import ssm.service.IBookService;
 
 import javax.annotation.Resource;

@@ -5,7 +5,7 @@
 <mapper namespace="ssm.dao.ICommentDao">
 
     <!--    反应数据库comment表select的列名与Bean对象字段的映射关系-->
-    <resultMap id="Comment" type="ssm.entity.Comment">
+    <resultMap id="Comment" type="ssm.dao.entity.Comment">
         <result column="content" property="content" jdbcType="VARCHAR" />
         <result column="grade" property="grade" jdbcType="TINYINT" />
         <result column="like" property="like" jdbcType="INTEGER" />

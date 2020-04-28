@@ -2,7 +2,7 @@ package ssm.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import ssm.entity.Comment;
+import ssm.dao.entity.Comment;
 
 @Repository
 public interface ICommentDao {

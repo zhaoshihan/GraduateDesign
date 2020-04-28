@@ -5,21 +5,28 @@
 <mapper namespace="ssm.dao.IMemberDao">
 
 <!--    反应数据库member表select的列名与Bean对象字段的映射关系-->
-    <resultMap id="Member" type="ssm.entity.Member">
-        <result column="id" property="id" jdbcType="INTEGER" />
-        <result column="user_name" property="userName" jdbcType="VARCHAR" />
-        <result column="passWord" property="passWord" jdbcType="VARCHAR" />
-        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
-        <result column="profile_path" property="profilePath" jdbcType="VARCHAR" />
+    <resultMap id="Member" type="ssm.dao.entity.Member">
+        <result column="id" jdbcType="INTEGER" property="id" javaType="long" />
+        <result column="username" jdbcType="VARCHAR" property="username" javaType="String" />
+        <result column="password" jdbcType="VARCHAR" property="password" javaType="String" />
+        <result column="nickname" jdbcType="VARCHAR" property="nickname" javaType="String" />
+        <result column="gender" jdbcType="CHAR" property="gender" javaType="String" />
+        <result column="city" jdbcType="VARCHAR" property="city" javaType="String" />
+        <result column="address" jdbcType="VARCHAR" property="address" javaType="String" />
+        <result column="postcode" jdbcType="CHAR" property="postcode" javaType="String" />
+        <result column="phone_number" jdbcType="CHAR" property="phoneNumber" javaType="String" />
+        <result column="email" jdbcType="VARCHAR" property="email" javaType="String" />
     </resultMap>
 
 <!--    对应在数据库中member表的各列名称-->
     <sql id="baseColumn">
-        member.id, member.user_name, member.passWord, member.nick_name, member.profile_path
+        member.id, member.username, member.password, member.nickname, member.gender, member.city,
+        member.address, member.postcode, member.phone_number, member.email
     </sql>
 
+
 <!--    这里的#{id}对应IMemberDao对象getMemberById方法的int id传入参数-->
-    <select id="getMemberById" resultMap="Member" parameterType="int">
+    <select id="getMemberById" resultMap="Member" parameterType="long">
         SELECT
             <include refid="baseColumn"></include>
         FROM
@@ -34,17 +41,37 @@
         FROM
             member
         WHERE
-            member.user_name = #{username}
+            member.username = #{username}
     </select>
 
 <!--    返回值int仍然为插入影响的行数，数据库内部自增id值被封装到参数对象中-->
-    <insert id="addMember" parameterType="ssm.entity.Member"
+    <insert id="addMember" parameterType="ssm.dao.entity.Member"
             useGeneratedKeys="true" keyProperty="member.id">
         INSERT INTO
             member
-            (user_name, password, nick_name)
+            (
+                username,
+                password,
+                nickname,
+                gender,
+                city,
+                address,
+                postcode,
+                phone_number,
+                email
+            )
         VALUES
-            (#{member.userName}, #{member.passWord}, #{member.nickName})
+            (
+                 #{member.username},
+                 #{member.password},
+                 #{member.nickname},
+                 #{member.gender},
+                 #{member.city},
+                 #{member.address},
+                 #{member.postcode},
+                 #{member.phoneNumber},
+                 #{member.email}
+             )
     </insert>
 
 

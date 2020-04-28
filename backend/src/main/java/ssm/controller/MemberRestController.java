@@ -1,6 +1,6 @@
 package ssm.controller;
 
-import ssm.entity.Member;
+import ssm.dao.entity.Member;
 import ssm.service.IMemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +31,8 @@ public class MemberRestController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity memberLogin(@RequestBody Member member){
-        String username = member.getUserName();
-        String password = member.getPassWord();
+        String username = member.getUsername();
+        String password = member.getPassword();
 
         if(memberService.memberExist(username, password)){
             member = memberService.getMemberByUsername(username);
@@ -41,7 +41,7 @@ public class MemberRestController {
             if (token != null) {
                 Map<String, String> body = new HashMap<>(2, 1.0f);
                 body.put("token", token);
-                body.put("userNickname", member.getNickName());
+                body.put("userNickname", member.getNickname());
 
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }

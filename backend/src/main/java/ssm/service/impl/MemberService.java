@@ -1,7 +1,7 @@
 package ssm.service.impl;
 import org.springframework.stereotype.Service;
 import ssm.dao.IMemberDao;
-import ssm.entity.Member;
+import ssm.dao.entity.Member;
 import ssm.service.IMemberService;
 import ssm.util.TokenUtil;
 
@@ -25,14 +25,14 @@ public class MemberService implements IMemberService {
     @Override
     public boolean memberExist(String username, String password) {
         Member existMember = memberDao.getMemberByUsername(username);
-        return existMember != null && password.equals(existMember.getPassWord());
+        return existMember != null && password.equals(existMember.getPassword());
     }
 
     @Override
     public String signToken(Member member) {
         if (member != null) {
-            String username = member.getUserName();
-            String password = member.getPassWord();
+            String username = member.getUsername();
+            String password = member.getPassword();
 
             return TokenUtil.sign(username, password);
         }

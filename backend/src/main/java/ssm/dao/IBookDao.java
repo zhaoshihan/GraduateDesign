@@ -2,8 +2,8 @@ package ssm.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import ssm.entity.Book;
-import ssm.entity.Comment;
+import ssm.dao.entity.Book;
+import ssm.dao.entity.Comment;
 
 import java.util.List;
 
