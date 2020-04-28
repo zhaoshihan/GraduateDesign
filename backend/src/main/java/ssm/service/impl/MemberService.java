@@ -32,9 +32,8 @@ public class MemberService implements IMemberService {
     public String signToken(Member member) {
         if (member != null) {
             String username = member.getUsername();
-            String password = member.getPassword();
 
-            return TokenUtil.sign(username, password);
+            return TokenUtil.sign(username);
         }
         return null;
     }

@@ -31,13 +31,13 @@ public class MemberServiceTest {
     public void signTokenTest() {
         Member member = new Member();
         member.setUsername("test_user_name");
-        member.setPassword("123456");
+//        member.setPassword("123456");
         String token = memberService.signToken(member);
         assertNotEquals(token, null);
 
         System.out.println("generate token = " + token);
 
-        String expected_token = TokenUtil.sign("test_user_name", "123456");
+        String expected_token = TokenUtil.sign("test_user_name");
 
         assertEquals(token, expected_token);
     }

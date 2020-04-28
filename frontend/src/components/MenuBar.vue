@@ -3,16 +3,16 @@
     <transition name="slide-up">
       <div class="menu-wrapper" :class="{'hide-box-shadow': ifSettingShow || !ifTitleAndMenuShow}" v-show="ifTitleAndMenuShow">
         <div class="icon-wrapper">
-          <span class="icon-menu icon" @click="showSetting(3)"></span>
+          <span class="icon-menu ebook-icon" @click="showSetting(3)"></span>
         </div>
         <div class="icon-wrapper">
-          <span class="icon-progress icon" @click="showSetting(2)"></span>
+          <span class="icon-progress ebook-icon" @click="showSetting(2)"></span>
         </div>
         <div class="icon-wrapper">
-          <span class="icon-bright icon" @click="showSetting(1)"></span>
+          <span class="icon-bright ebook-icon" @click="showSetting(1)"></span>
         </div>
         <div class="icon-wrapper">
-          <span class="icon-a icon" @click="showSetting(0)">A</span>
+          <span class="icon-a ebook-icon" @click="showSetting(0)">A</span>
         </div>
       </div>
     </transition>
@@ -293,19 +293,19 @@ export default {
           .progress {
             width: 100%;
             -webkit-appearance: none;
-            height: px2rem(10);
-            background: -webkit-linear-gradient(#999, #999) no-repeat, #ddd;
+            height: px2rem(20);
+            background: -webkit-linear-gradient(#555, #555) no-repeat, #ddd;
             background-size: 0 100%;
             &:focus {
-              outline: none;
+              outline: black;
             }
             &::-webkit-slider-thumb {
               -webkit-appearance: none;
-              height: px2rem(40);
-              width: px2rem(40);
+              height: px2rem(30);
+              width: px2rem(30);
               border-radius: 50%;
               background: white;
-              box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .15);
+              box-shadow: px2rem(4) rgba(0, 0, 0, .15);
               border: px2rem(2.5) solid #ddd;
             }
           }
@@ -316,7 +316,7 @@ export default {
           bottom: 0;
           width: 100%;
           color: #333;
-          font-size: 1.5em;
+          font-size: 1em;
           text-align: center;
         }
       }

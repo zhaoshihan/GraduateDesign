@@ -41,7 +41,7 @@ public class MemberRestController {
             if (token != null) {
                 Map<String, String> body = new HashMap<>(2, 1.0f);
                 body.put("token", token);
-                body.put("userNickname", member.getNickname());
+                body.put("nickname", member.getNickname());
 
                 return new ResponseEntity<>(body, HttpStatus.OK);
             }

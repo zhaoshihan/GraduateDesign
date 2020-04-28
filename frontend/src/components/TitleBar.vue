@@ -2,17 +2,17 @@
   <transition name="slide-down">
       <div class="title-wrapper" v-show="ifTitleAndMenuShow">
         <div class="left">
-          <span class="icon-back icon" @click="backHome"></span>
+          <span class="icon-back ebook-icon" @click="backHome"></span>
         </div>
         <div class="right">
           <div class="icon-wrapper">
-            <span class="icon-cart icon"></span>
+            <span class="icon-cart ebook-icon"></span>
           </div>
           <div class="icon-wrapper">
-            <span class="icon-person icon"></span>
+            <span class="icon-person ebook-icon"></span>
           </div>
           <div class="icon-wrapper">
-            <span class="icon-more icon"></span>
+            <span class="icon-more ebook-icon"></span>
           </div>
         </div>
       </div>

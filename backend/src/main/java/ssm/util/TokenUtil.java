@@ -23,10 +23,9 @@ public class TokenUtil {
      * 生成签名，15min过期
      *
      * @param username
-     * @param password
      * @return
      */
-    public static String sign(String username, String password) {
+    public static String sign(String username) {
         try {
             long currentTimeMillis = System.currentTimeMillis();
             // 当前时间
@@ -43,7 +42,6 @@ public class TokenUtil {
             return JWT.create()
                     .withHeader(header)
                     .withClaim("username", username)
-                    .withClaim("password", password)
                     .withIssuer(ISSUER)
                     .withIssuedAt(currentTime)
                     .withExpiresAt(expireTime)

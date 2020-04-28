@@ -3,21 +3,19 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.min.css'
 import '@/assets/styles/icon.css'
 import '@/assets/styles/global.scss'
 import '@fortawesome/fontawesome-free/css/all.min.css'
+import 'bulma/css/bulma.min.css'
 
-// 引入bootstrap.js 为了nav-bar的隐藏/展开操作
-import 'bootstrap'
-import 'popper.js'
-import BootrapVue from 'bootstrap-vue'
+// import 'iview/dist/styles/iview.css'
+
 import Axios from 'axios'
 import md5 from 'js-md5'
 
 // 为Axios进行统一的config设置
 Axios.defaults.baseURL = 'http://localhost:8081'
+Axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
 
 // 为Axios添加请求拦截器和响应拦截器，统一进行错误处理（免去逐个使用catch）
 Axios.interceptors.request.use(
@@ -42,8 +40,6 @@ Axios.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-
-Vue.use(BootrapVue)
 
 // 将Axios与Vue实例绑定
 Vue.prototype.$axios = Axios
