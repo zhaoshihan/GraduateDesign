@@ -1,6 +1,8 @@
 package ssm.service;
 import ssm.dao.entity.Member;
 
+import javax.json.JsonObject;
+
 public interface IMemberService {
 
     public Member getMemberById(int id);
@@ -10,6 +12,8 @@ public interface IMemberService {
     public boolean memberExist(String username, String password);
 
     public String signToken(Member member);
+
+    public JsonObject getReturnJsonObject(Member member, String token);
 
     public String getUserNameFromToken(String token);
 

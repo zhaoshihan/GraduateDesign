@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import TitleBar from '../components/TitleBar'
-import MenuBar from '../components/MenuBar'
+import TitleBar from '../components/ebook/TitleBar'
+import MenuBar from '../components/ebook/MenuBar'
 import Epub from 'epubjs'
 const DOWNLOAD_URL = '/static/RedChamber.epub'
 

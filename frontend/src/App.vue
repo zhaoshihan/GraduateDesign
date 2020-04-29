@@ -11,7 +11,20 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+
+  created: function () {
+    this.$axios.interceptors.response.use(undefined, function (error) {
+      return new Promise(function (resolve, reject) {
+        // token过期时的处理, 触发logout action(在store/user.js中), 返回'/login'页面
+        if (error.status === 401 && error.config && !error.config.__isRetryRequest) {
+          this.$store.dispatch('logout')
+        }
+        throw error;
+      });
+    });
+  }
+
 }
 // document.addEventListener('DOMContentLoaded', () => {
 //   const html = document.querySelector('html')

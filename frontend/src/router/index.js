@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index.js'
 
 // @ is an alias to /src
 // import Register from '../views/Register'
@@ -68,34 +69,41 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title
   if (to.meta.requireAuth) {
-    console.log('current localstorage token = ' + window.localStorage.token)
-    if (window.localStorage.token) {
-      console.log('token exist')
+    if (store.getters.isLoggedIn) {
       next()
-    } else {
-      console.log('token not exist')
-      next({ path: '/login' })
+      return
     }
-    // const axiosInstance = Axios.create({
-    //   baseURL: 'http://localhost:8081',
-    //   headers: {
-    //     Auth_Token: store.state.token
-    //   }
-    // })
-    // // 这个后端接口是空的
-    // axiosInstance.post('/token/check', null
-    // ).then(response => {
-    //   console.log(response)
-    //   next()
-    // }).catch(error => {
-    //   console.warn(error)
-    //   next({ path: '/login' })
-    // })
+    next('/login')
   } else {
     next()
   }
-})
 
+  // if (to.meta.requireAuth) {
+  //   console.log('current localstorage token = ' + window.localStorage.token)
+  //   if (window.localStorage.token) {
+  //     console.log('token exist')
+  //     next()
+  //   } else {
+  //     console.log('token not exist')
+  //     next({ path: '/login' })
+  //   }
+
+  // const axiosInstance = Axios.create({
+  //   baseURL: 'http://localhost:8081',
+  //   headers: {
+  //     Auth_Token: store.state.token
+  //   }
+  // })
+  // // 这个后端接口是空的
+  // axiosInstance.post('/token/check', null
+  // ).then(response => {
+  //   console.log(response)
+  //   next()
+  // }).catch(error => {
+  //   console.warn(error)
+  //   next({ path: '/login' })
+  // })
+})
 // router.afterEach((to, from, next) => {
 //   window.scrollTo(0, 0)
 // })

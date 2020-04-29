@@ -20,9 +20,10 @@ Axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
 // 为Axios添加请求拦截器和响应拦截器，统一进行错误处理（免去逐个使用catch）
 Axios.interceptors.request.use(
   config => {
-    if (window.localStorage.token) {
+    const token = localStorage.getItem('token')
+    if (token) {
       // 如果token值不为空，则自动添加入request headers中
-      config.headers.Authorization = window.localStorage.token
+      config.headers.Authorization = token
     }
     return config
   }, error => {

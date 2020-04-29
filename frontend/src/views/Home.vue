@@ -1,35 +1,50 @@
 <template>
-  <div id="home">
-    <p>This is home page</p>
-    <p>current token = {{token}}</p>
-    <p>current user nickname = {{nickname}}</p>
-    <button><router-link to="/ebook">Ebook1</router-link></button>
+<!--  <div id="home">-->
+<!--    <p>This is home page</p>-->
+<!--    <p>current token = {{token}}</p>-->
+<!--    <p>current user nickname = {{nickname}}</p>-->
+<!--    <button><router-link to="/ebook">Ebook1</router-link></button>-->
+<!--  </div>-->
 
+  <div class="container">
+    <Navbar></Navbar>
+
+<!--    <div class="columns">-->
+<!--      <div class="column is-one-fifth">-->
+<!--        <side-bar @changeBar="handleChangeBar"></side-bar>-->
+<!--      </div>-->
+<!--      <div class="column">-->
+<!--        <component :is="currentView"></component>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import Navbar from '../components/common/Navbar'
 
 export default {
   name: 'Home',
+  components: { Navbar },
   data () {
     return {
       token: '',
       nickname: ''
     }
   },
-  // components: {
-  //   HelloWorld
-  // }
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn
+    }
+  },
   mounted () {
-    if (window.localStorage.token) {
-      this.token = window.localStorage.token
-    }
-    if (window.localStorage.userNickname) {
-      this.nickname = window.localStorage.nickname
-    }
+    // if (window.localStorage.token) {
+    //   this.token = window.localStorage.token
+    // }
+    // if (window.localStorage.userNickname) {
+    //   this.nickname = window.localStorage.nickname
+    // }
   }
 }
 </script>

@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import ContentView from '../components/Content'
+import ContentView from './Content'
 export default {
   components: {
     ContentView
@@ -144,7 +144,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import '../assets/styles/global';
+@import '../../assets/styles/global';
 .menu-bar {
   .menu-wrapper {
     position: absolute;

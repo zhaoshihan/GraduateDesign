@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.json.JsonObject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,12 +39,11 @@ public class MemberRestController {
             member = memberService.getMemberByUsername(username);
 
             String token = memberService.signToken(member);
-            if (token != null) {
-                Map<String, String> body = new HashMap<>(2, 1.0f);
-                body.put("token", token);
-                body.put("nickname", member.getNickname());
 
-                return new ResponseEntity<>(body, HttpStatus.OK);
+            if (token != null) {
+                JsonObject returnJson = memberService.getReturnJsonObject(member, token);
+
+                return new ResponseEntity<>(returnJson, HttpStatus.OK);
             }
             else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -122,22 +122,27 @@ export default {
   },
   methods: {
     login: function () {
-      console.log(this.loginForm)
+      // let username = this.getUsername
+      // let password = this.getPassword
 
-      this.$axios({
-        method: 'post',
-        url: '/member/login',
-        data: {
-          username: this.getUsername,
-          password: this.getPassword
-        }
-      }).then(response => {
-        console.log(response.data)
-        // this.$store.commit('logIn', response.data)
-        window.localStorage.token = response.data.token
-        window.localStorage.nickname = response.data.nickname
-        this.$router.push('/home')
-      })
+      this.$store.dispatch('login', this.loginForm)
+        .then(() => this.$router.push('/home'))
+
+      // console.log(this.loginForm)
+      // this.$axios({
+      //   method: 'post',
+      //   url: '/member/login',
+      //   data: {
+      //     username: this.getUsername,
+      //     password: this.getPassword
+      //   }
+      // }).then(response => {
+      //   console.log(response.data)
+      //   // this.$store.commit('logIn', response.data)
+      //   window.localStorage.token = response.data.token
+      //   window.localStorage.nickname = response.data.nickname
+      //   this.$router.push('/home')
+      // })
     }
   }
 }

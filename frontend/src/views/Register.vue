@@ -168,18 +168,27 @@ export default {
   },
   methods: {
     register: function () {
-      console.log(this.registerForm)
+      this.$store.dispatch('register', this.registerForm)
+        .then(() => {
+          alert('register success!')
+          this.$router.push('/login')
+        })
+        .catch(() => {
+          alert('register failed!')
+        })
 
-      this.$axios({
-        method: 'post',
-        url: '/member/register',
-        data: this.registerForm
-      }).then(() => {
-        alert('register success!')
-        this.$router.push('/login')
-      }).catch(() => {
-        alert('register failed!')
-      })
+      // console.log(this.registerForm)
+      //
+      // this.$axios({
+      //   method: 'post',
+      //   url: '/member/register',
+      //   data: this.registerForm
+      // }).then(() => {
+      //   alert('register success!')
+      //   this.$router.push('/login')
+      // }).catch(() => {
+      //   alert('register failed!')
+      // })
     }
   }
 }
