@@ -9,6 +9,8 @@ import javax.annotation.Resource;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+
+//import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,37 +45,37 @@ public class MemberService implements IMemberService {
         return null;
     }
 
-//    @Override
-//    public Map<String, Object> getReturnMember(Member member) {
-//        Map<String, Object> res = new HashMap<>();
-//        res.put("id", member.getId());
-//        res.put("nickname", member.getNickname());
-//        res.put("gender", member.getGender());
-//        res.put("city", member.getCity());
-//        res.put("address", member.getAddress());
-//        res.put("phoneNumber", member.getPhoneNumber());
-//        res.put("postcode", member.getPostcode());
-//        res.put("email", member.getEmail());
-//
-//        return res;
-//    }
-
     @Override
-    public JsonObject getReturnJsonObject(Member member, String token) {
-        JsonObjectBuilder res = Json.createObjectBuilder();
-        res.add("token", token);
-        res.add("user", Json.createObjectBuilder()
-                .add("id", member.getId())
-                .add("nickname", member.getNickname())
-                .add("gender", member.getGender())
-                .add("city", member.getCity())
-                .add("address", member.getAddress())
-                .add("phoneNumber", member.getPhoneNumber())
-                .add("postcode", member.getPostcode())
-                .add("email", member.getEmail())
-        );
+    public Map<String, Object> getReturnMapObject(Member member, String token) {
+        Map<String, Object> res = new HashMap<>();
+        res.put("token", token);
 
-        return res.build();
+        Map<String, Object> user = new HashMap<>();
+        user.put("id", member.getId());
+        user.put("nickname", member.getNickname());
+        user.put("gender", member.getGender());
+        user.put("city", member.getCity());
+        user.put("address", member.getAddress());
+        user.put("phoneNumber", member.getPhoneNumber());
+        user.put("postcode", member.getPostcode());
+        user.put("email", member.getEmail());
+
+        res.put("user", user);
+
+//        JsonObjectBuilder res = Json.createObjectBuilder();
+//        res.add("token", token);
+//        res.add("user", Json.createObjectBuilder()
+//                .add("id", member.getId())
+//                .add("nickname", member.getNickname())
+//                .add("gender", member.getGender())
+//                .add("city", member.getCity())
+//                .add("address", member.getAddress())
+//                .add("phoneNumber", member.getPhoneNumber())
+//                .add("postcode", member.getPostcode())
+//                .add("email", member.getEmail())
+//        );
+
+        return res;
     }
 
     @Override

@@ -7,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.json.JsonObject;
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -17,18 +15,6 @@ import java.util.Map;
 public class MemberRestController {
     @Resource
     private IMemberService memberService;
-
-//    private String[] getFromBASE64(String authorization){
-//        if (authorization != null && authorization.toLowerCase().startsWith("basic")) {
-//            // Authorization: Basic base64credentials
-//            String base64Credentials = authorization.substring("Basic".length()).trim();
-//            byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
-//            String credentials = new String(credDecoded, StandardCharsets.UTF_8);
-//            // credentials = username:password
-//            return credentials.split(":", 2);
-//        }
-//        else return null;
-//    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity memberLogin(@RequestBody Member member){
@@ -41,9 +27,9 @@ public class MemberRestController {
             String token = memberService.signToken(member);
 
             if (token != null) {
-                JsonObject returnJson = memberService.getReturnJsonObject(member, token);
+                Map<String, Object> res = memberService.getReturnMapObject(member, token);
 
-                return new ResponseEntity<>(returnJson, HttpStatus.OK);
+                return new ResponseEntity<>(res, HttpStatus.OK);
             }
             else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

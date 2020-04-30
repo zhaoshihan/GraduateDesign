@@ -6,25 +6,35 @@
 
     <!--    反应数据库comment表select的列名与Bean对象字段的映射关系-->
     <resultMap id="Comment" type="ssm.dao.entity.Comment">
-        <result column="content" property="content" jdbcType="VARCHAR" />
-        <result column="grade" property="grade" jdbcType="TINYINT" />
-        <result column="like" property="like" jdbcType="INTEGER" />
+        <result column="content" jdbcType="VARCHAR" property="content" javaType="String"/>
+        <result column="grade" jdbcType="TINYINT" property="grade" javaType="byte" />
+        <result column="book_id" jdbcType="INTEGER" property="bookID" javaType="long" />
+        <result column="user_id" jdbcType="INTEGER" property="memberID" javaType="long" />
     </resultMap>
 
     <!--    对应在数据库中comment表的各列名称-->
-    <sql id="baseColumn">
-        comment.content, comment.grade, comment.like
+    <sql id="baseCommentColumn">
+        comment.content, comment.grade, comment.book_id, comment.user_id
     </sql>
 
-    <select id="getCommentById" resultMap="Comment" parameterType="int">
+    <select id="getCommentById" resultMap="Comment" parameterType="long">
         SELECT
-            <include refid="baseColumn"></include>
+            <include refid="baseCommentColumn"></include>
         FROM
             comment
         WHERE
                 comment.book_id = #{bookId}
             AND
                 comment.user_id = #{userId}
+    </select>
+
+    <select id="getRelatedCommentsByUserId" resultMap="Comment" parameterType="long">
+        SELECT
+        <include refid="baseCommentColumn"></include>
+        FROM
+            comment
+        WHERE
+            comment.book_id = #{userId}
     </select>
 
 </mapper>

@@ -1,5 +1,6 @@
 package ssm.dao.entity;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 public class Book {
@@ -9,8 +10,13 @@ public class Book {
     private String category;
     private String nation;
     private Date publishDate;
-    private int price;
+    private BigDecimal price;
     private String description;
+
+    // 书籍的平均评分, 根据Comment表的多对一关系计算得到
+    private double averageGrade;
+    // 书籍参与评分的人数，根据Comment表计算得到
+    private int commentNumber;
 
     public long getId() {
         return id;
@@ -60,11 +66,11 @@ public class Book {
         this.publishDate = publishDate;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -74,6 +80,22 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getAverageGrade() {
+        return averageGrade;
+    }
+
+    public void setAverageGrade(double averageGrade) {
+        this.averageGrade = averageGrade;
+    }
+
+    public int getCommentNumber() {
+        return commentNumber;
+    }
+
+    public void setCommentNumber(int commentNumber) {
+        this.commentNumber = commentNumber;
     }
 
     @Override

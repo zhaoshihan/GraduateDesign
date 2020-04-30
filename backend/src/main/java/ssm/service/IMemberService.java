@@ -1,7 +1,7 @@
 package ssm.service;
 import ssm.dao.entity.Member;
 
-import javax.json.JsonObject;
+import java.util.Map;
 
 public interface IMemberService {
 
@@ -13,7 +13,7 @@ public interface IMemberService {
 
     public String signToken(Member member);
 
-    public JsonObject getReturnJsonObject(Member member, String token);
+    public Map<String, Object> getReturnMapObject(Member member, String token);
 
     public String getUserNameFromToken(String token);
 

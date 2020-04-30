@@ -7,9 +7,9 @@ import ssm.dao.IMemberDao;
 import ssm.dao.entity.Member;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import static org.junit.Assert.assertEquals;
@@ -21,33 +21,33 @@ import static org.junit.Assert.assertEquals;
 )
 @Transactional
 public class MemberDaoTest {
-    @Autowired
+    @Resource
     private IMemberDao memberDao;
 
     @Test
     public void testSelect() {
         Member member = memberDao.getMemberById(1);
-        assertEquals(member.getUsername(),"zhangsan");
-        assertEquals(member.getPassword(), "123456");
-        assertEquals(member.getNickname(), "张三");
-        assertEquals(member.getGender(), "男");
-        assertEquals(member.getCity(), "武汉");
-        assertEquals(member.getAddress(), "洪山街道");
-        assertEquals(member.getPostcode(), "430072");
-        assertEquals(member.getPhoneNumber(), "15612345678");
-        assertEquals(member.getEmail(), "zhangsan@qq.com");
+        assertEquals("zhangsan", member.getUsername());
+        assertEquals("123456", member.getPassword());
+        assertEquals("张三", member.getNickname());
+        assertEquals("男", member.getGender());
+        assertEquals("武汉", member.getCity());
+        assertEquals("洪山街道", member.getAddress());
+        assertEquals("430072", member.getPostcode());
+        assertEquals("15612345678", member.getPhoneNumber());
+        assertEquals("zhangsan@qq.com", member.getEmail());
 
 
         member = memberDao.getMemberByUsername("lisi");
-        assertEquals(member.getId(), 2);
-        assertEquals(member.getPassword(), "111111");
-        assertEquals(member.getNickname(), "李四");
-        assertEquals(member.getGender(), "女");
-        assertEquals(member.getCity(), "北京");
-        assertEquals(member.getAddress(), "长安街道");
-        assertEquals(member.getPostcode(), "100010");
-        assertEquals(member.getPhoneNumber(), "19312345678");
-        assertEquals(member.getEmail(), "lisi@163.com");
+        assertEquals(2, member.getId());
+        assertEquals("111111", member.getPassword());
+        assertEquals("李四", member.getNickname());
+        assertEquals("女", member.getGender());
+        assertEquals("北京", member.getCity());
+        assertEquals("长安街道", member.getAddress());
+        assertEquals("100010", member.getPostcode());
+        assertEquals("19312345678", member.getPhoneNumber());
+        assertEquals("lisi@163.com", member.getEmail());
     }
 
     @Test
@@ -64,12 +64,12 @@ public class MemberDaoTest {
         member.setEmail("wangwu@126.com");
 
         int influence_row = memberDao.addMember(member);
-        assertEquals(influence_row, 1);
+        assertEquals(1, influence_row);
 
         long new_id = member.getId();
 
         member = memberDao.getMemberById(new_id);
-        assertEquals(member.getUsername(), "wangwu");
+        assertEquals("wangwu", member.getUsername());
     }
 
 //    @Test

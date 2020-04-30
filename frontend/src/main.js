@@ -8,6 +8,10 @@ import '@/assets/styles/global.scss'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'bulma/css/bulma.min.css'
 
+// vue-star-rating组件，为了显示star
+// import StarRating from 'vue-star-rating'
+// Vue.component('StarRating', StarRating)
+
 // import 'iview/dist/styles/iview.css'
 
 import Axios from 'axios'

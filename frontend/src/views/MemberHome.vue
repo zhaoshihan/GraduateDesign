@@ -9,34 +9,50 @@
   <div class="container">
     <Navbar></Navbar>
 
-<!--    <div class="columns">-->
-<!--      <div class="column is-one-fifth">-->
-<!--        <side-bar @changeBar="handleChangeBar"></side-bar>-->
-<!--      </div>-->
-<!--      <div class="column">-->
-<!--        <component :is="currentView"></component>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="columns">
+      <div class="column is-one-fifth">
+        <Sidebar @changeBar="handleChangeBar"></Sidebar>
+      </div>
+      <div class="column">
+        <component :is="currentView"></component>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Navbar from '../components/common/Navbar'
+import Sidebar from '../components/member/MemberSidebar'
+import BookDisplay from '../components/member/BookDisplay'
+// import Cart from '../components/member/Cart'
+// import OwnOrder from '../components/member/OwnOrder'
 
 export default {
   name: 'Home',
-  components: { Navbar },
+  components: {
+    Navbar,
+    Sidebar,
+    BookDisplay,
+    // Cart,
+    // OwnOrder,
+  },
   data () {
     return {
-      token: '',
-      nickname: ''
+      // token: '',
+      // nickname: ''
+      currentView: 'BookDisplay'
     }
   },
   computed: {
     isLoggedIn: function () {
       return this.$store.getters.isLoggedIn
     }
+  },
+  methods: {
+    handleChangeBar:function (name) {
+      this.currentView = name;
+    },
   },
   mounted () {
     // if (window.localStorage.token) {

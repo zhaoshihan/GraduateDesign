@@ -5,6 +5,7 @@ import ssm.dao.entity.Comment;
 import ssm.service.ICommentService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("CommentService")
 public class CommentService implements ICommentService {
@@ -12,8 +13,13 @@ public class CommentService implements ICommentService {
     private ICommentDao commentDao;
 
     @Override
-    public Comment getCommentById(int bookId, int userId) {
+    public Comment getCommentById(long bookId, long userId) {
         return commentDao.getCommentById(bookId, userId);
+    }
+
+    @Override
+    public List<Comment> getRelatedCommentsByUserId(long userId) {
+        return commentDao.getRelatedCommentsByUserId(userId);
     }
 
 }

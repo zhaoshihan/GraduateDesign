@@ -5,7 +5,7 @@ import store from '../store/index.js'
 // @ is an alias to /src
 // import Register from '../views/Register'
 // import Login from '../views/Login'
-import Home from '../views/Home'
+import MemberHome from '../views/MemberHome'
 import Ebook from '../views/Ebook'
 
 // import store from '../store/user'
@@ -36,12 +36,12 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'Home',
+    name: 'MemberHome',
     meta: {
-      title: '主页',
+      title: '会员主页',
       requireAuth: true
     },
-    component: Home
+    component: MemberHome
   },
   {
     path: '/ebook',

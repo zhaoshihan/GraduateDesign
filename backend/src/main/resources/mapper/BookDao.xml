@@ -6,44 +6,62 @@
 
     <!--    反应数据库book表select的列名与Bean对象字段的映射关系-->
     <resultMap id="Book" type="ssm.dao.entity.Book">
-        <result column="profile_path" property="profilePath" jdbcType="VARCHAR" />
-        <result column="file_path" property="filePath" jdbcType="VARCHAR" />
-    </resultMap>
-
-    <!--    反应数据库comment表select的列名与Bean对象字段的映射关系-->
-    <resultMap id="Comment" type="ssm.dao.entity.Comment">
-        <result column="content" property="content" jdbcType="VARCHAR" />
-        <result column="grade" property="grade" jdbcType="TINYINT" />
-        <result column="like" property="like" jdbcType="INTEGER" />
+        <result column="id" jdbcType="INTEGER" property="id" javaType="long" />
+        <result column="bookname" jdbcType="VARCHAR" property="bookname" javaType="String" />
+        <result column="author" jdbcType="VARCHAR" property="author" javaType="String" />
+        <result column="category" jdbcType="VARCHAR" property="category" javaType="String" />
+        <result column="nation" jdbcType="VARCHAR" property="nation" javaType="String" />
+        <result column="publish_date" jdbcType="DATE" property="publishDate" javaType="java.sql.Date" />
+        <result column="price" jdbcType="DECIMAL" property="price" javaType="java.math.BigDecimal" />
+        <result column="description" jdbcType="VARCHAR" property="description" javaType="String" />
+<!--        以下两项为Comment表数据计算得到-->
+        <result column="avg" jdbcType="DOUBLE" property="averageGrade" javaType="double" />
+        <result column="sum" jdbcType="INTEGER" property="commentNumber" javaType="int" />
     </resultMap>
 
     <sql id="baseBookColumn">
-        book.profile_path, book.file_path
-    </sql>
-
-    <!--    对应在数据库中comment表的各列名称-->
-    <sql id="baseCommentColumn">
-        comment.content, comment.grade, comment.like
+        book.id, book.bookname, book.author, book.category, book.nation, book.publish_date,
+        book.price, book.description
     </sql>
 
 
-    <select id="getBookById" resultMap="Book" parameterType="int">
+    <select id="getBookById" resultMap="Book" parameterType="long">
         SELECT
-            <include refid="baseBookColumn"></include>
+            <include refid="baseBookColumn"></include>,
+            ROUND(AVG(comment.grade), 2) AS 'avg',
+            COUNT(*) AS 'sum'
         FROM
-            book
+        (
+                book
+            LEFT JOIN
+                comment
+            ON
+                book.id = comment.book_id
+        )
         WHERE
             book.id = #{id}
+        GROUP BY
+            book.id
     </select>
 
-    <select id="getRelatedCommentsById" resultMap="Comment" parameterType="int">
+    <select id="getAllBooks" resultMap="Book">
         SELECT
-            <include refid="baseCommentColumn"></include>
+            <include refid="baseBookColumn"></include>,
+            ROUND(AVG(comment.grade), 2) AS 'avg',
+            COUNT(*) AS 'sum'
         FROM
-            comment
-        WHERE
-            comment.book_id = #{id}
+        (
+                book
+            LEFT JOIN
+                comment
+            ON
+                book.id = comment.book_id
+        )
+        GROUP BY
+            book.id
     </select>
+
+
 
 <!--    <select id="getMemberById" resultType="ssm.dao.entity.Member" parameterType="int">select * from member where id = #{id}</select>-->
 <!--    <select id="getMemberByAccount" resultType="ssm.dao.entity.Member" parameterType="String">select * from member where account = #{account}</select>-->

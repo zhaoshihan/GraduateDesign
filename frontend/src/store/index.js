@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import user from '@/store/user'
+import book from '@/store/book'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -12,6 +14,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    user
+    user,
+    book
   }
 })
