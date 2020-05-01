@@ -5,8 +5,6 @@ import store from '../store/index.js'
 // @ is an alias to /src
 // import Register from '../views/Register'
 // import Login from '../views/Login'
-import MemberHome from '../views/MemberHome'
-import Ebook from '../views/Ebook'
 
 // import store from '../store/user'
 Vue.use(VueRouter)
@@ -41,7 +39,7 @@ const routes = [
       title: '会员主页',
       requireAuth: true
     },
-    component: MemberHome
+    component: () => import('../views/MemberHome.vue')
   },
   {
     path: '/ebook',
@@ -50,7 +48,7 @@ const routes = [
       title: '电子书页',
       requireAuth: true
     },
-    component: Ebook
+    component: () => import('../views/Ebook.vue')
   }
   // {
   //   path: '/about',
@@ -104,6 +102,8 @@ router.beforeEach((to, from, next) => {
   //   next({ path: '/login' })
   // })
 })
+
+
 // router.afterEach((to, from, next) => {
 //   window.scrollTo(0, 0)
 // })

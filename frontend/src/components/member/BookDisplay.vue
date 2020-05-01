@@ -51,7 +51,10 @@
     import BookCard from './BookCard'
     export default {
         mounted () {
-            this.$store.dispatch('getBookList');
+            const booklist = this.$store.getters.bookList
+            if (Array.isArray(booklist) && booklist.length === 0) {
+              this.$store.dispatch('getBookList')
+            }
         },
         components: {
           BookCard

@@ -29,6 +29,7 @@ export default {
   },
   methods: {
     backHome () {
+      this.$store.commit('exist_current_book')
       this.$router.push('/home')
     }
   }

@@ -29,7 +29,7 @@
         SELECT
             <include refid="baseBookColumn"></include>,
             ROUND(AVG(comment.grade), 2) AS 'avg',
-            COUNT(*) AS 'sum'
+            COUNT(comment.book_id) AS 'sum'
         FROM
         (
                 book
@@ -48,7 +48,7 @@
         SELECT
             <include refid="baseBookColumn"></include>,
             ROUND(AVG(comment.grade), 2) AS 'avg',
-            COUNT(*) AS 'sum'
+            COUNT(comment.book_id) AS 'sum'
         FROM
         (
                 book

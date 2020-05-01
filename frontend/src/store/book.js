@@ -17,7 +17,8 @@ function getFilterArray (array) {
 const book = {
   state: {
     status: '',
-    bookList: []
+    bookList: [],
+    currentBook: null
   },
   getters: {
     categories: state => {
@@ -35,37 +36,45 @@ const book = {
       });
       return dict;
     },
-    bookList: state => state.bookList
+    bookList: state => state.bookList,
+    currentBook: state => state.currentBook
   },
   mutations: {
-    book_request (state) {
+    booklist_request (state) {
       state.status = 'loading'
     },
     // 添加书籍列表
-    book_success (state, payload) {
+    booklist_success (state, payload) {
       state.status = 'success'
       state.bookList = payload;
     },
-    book_error (state) {
+    booklist_error (state) {
       state.status = 'error'
       state.bookList = []
     },
+
+    enter_current_book (state, payload) {
+      state.currentBook = payload
+    },
+    exist_current_book (state) {
+      state.currentBook = null
+    }
   },
   actions: {
-    // 请求商品列表
+    // 请求书籍列表
     getBookList ({ commit }) {
       return new Promise((resolve, reject) => {
-        commit('book_request')
+        commit('booklist_request')
         axios({
           method: 'GET',
           url: '/book/all',
         }).then(response => {
-          console.log(response.data)
-          commit('book_success', response.data)
+          // console.log(response.data)
+          commit('booklist_success', response.data)
 
           resolve(response)
         }).catch(error => {
-          commit('book_error', error)
+          commit('booklist_error', error)
 
           reject(error)
         })

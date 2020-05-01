@@ -1,6 +1,5 @@
 <template>
   <div class="ebook">
-<!--    <p>ebook vue</p>-->
     <title-bar :ifTitleAndMenuShow="ifTitleAndMenuShow"></title-bar>
     <div class="read-wrapper">
       <div id="read"></div>
@@ -22,7 +21,6 @@
               :navigation="navigation"
               @jumpTo="jumpTo"
               ref="menuBar"></menu-bar>
-<!--    <p>end of ebook vue</p>-->
   </div>
 </template>
 
@@ -30,7 +28,7 @@
 import TitleBar from '../components/ebook/TitleBar'
 import MenuBar from '../components/ebook/MenuBar'
 import Epub from 'epubjs'
-const DOWNLOAD_URL = '/static/RedChamber.epub'
+const BASE_URL = '/static/epubs/'
 
 export default {
   components: {
@@ -88,6 +86,12 @@ export default {
       // 图书是否处于可用状态
       bookAvailable: false,
       navigation: {}
+    }
+  },
+  computed: {
+    generateBookURL () {
+      const currentBook = this.$store.getters.currentBook
+      return BASE_URL + currentBook.bookname + '.epub'
     }
   },
   methods: {
@@ -149,9 +153,13 @@ export default {
     },
     // 电子书的解析和渲染
     showEpub () {
+      // test
+      // console.log('test generate URL')
+      // console.log(this.generateBookURL)
+
       // 生成Book对象
-      this.book = new Epub(DOWNLOAD_URL)
-      console.log(this.book)
+      this.book = new Epub(this.generateBookURL)
+      // console.log(this.book)
 
       // 通过Book.renderTo生成Rendition对象
       this.rendition = this.book.renderTo('read', {
@@ -184,7 +192,9 @@ export default {
     }
   },
   mounted () {
-    this.showEpub()
+    if (this.$store.getters.currentBook) {
+      this.showEpub()
+    }
   }
 }
 </script>
@@ -192,6 +202,7 @@ export default {
 <style lang='scss' scoped>
 @import '../assets/styles/global';
 .ebook {
+  /*position: relative;*/
   position: relative;
   .read-wrapper {
     .mask {
