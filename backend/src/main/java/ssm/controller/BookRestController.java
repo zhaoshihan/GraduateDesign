@@ -10,7 +10,6 @@ import ssm.dao.entity.Book;
 import ssm.service.IBookService;
 
 import javax.annotation.Resource;
-import javax.json.JsonArray;
 import java.util.List;
 
 @RestController
@@ -23,10 +22,7 @@ public class BookRestController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAllBooks() {
         List<Book> bookList = bookService.getAllBooks();
-        if (bookList != null) {
-            return new ResponseEntity<>(bookList, HttpStatus.OK);
-        }
-        else return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
+        return new ResponseEntity<>(bookList, HttpStatus.OK);
     }
 }

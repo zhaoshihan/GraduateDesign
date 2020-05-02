@@ -30,6 +30,11 @@ import BookDisplay from '../components/member/BookDisplay'
 
 export default {
   name: 'Home',
+  // beforeCreate () {
+  //   if (!this.hasCurrentUser) {
+  //     this.$store.dispatch('regetUser')
+  //   }
+  // },
   components: {
     Navbar,
     Sidebar,
@@ -45,23 +50,29 @@ export default {
     }
   },
   computed: {
-    isLoggedIn: function () {
-      return this.$store.getters.isLoggedIn
+    // isLoggedIn () {
+    //   return this.$store.getters.isLoggedIn
+    // },
+    hasCurrentUser () {
+      return this.$store.getters.hasCurrentUser
     }
   },
   methods: {
-    handleChangeBar:function (name) {
+    handleChangeBar (name) {
       this.currentView = name;
     },
   },
-  mounted () {
-    // if (window.localStorage.token) {
-    //   this.token = window.localStorage.token
-    // }
-    // if (window.localStorage.userNickname) {
-    //   this.nickname = window.localStorage.nickname
-    // }
-  }
+  // beforeCreate () {
+  //   if (!this.hasCurrentUser) {
+  //     this.$store.dispatch('regetUser')
+  //   }
+  //   // if (window.localStorage.token) {
+  //   //   this.token = window.localStorage.token
+  //   // }
+  //   // if (window.localStorage.userNickname) {
+  //   //   this.nickname = window.localStorage.nickname
+  //   // }
+  // }
 }
 </script>
 

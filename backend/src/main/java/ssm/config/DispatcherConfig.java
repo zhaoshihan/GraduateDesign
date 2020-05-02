@@ -30,9 +30,9 @@ public class DispatcherConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加TokenInterceptor拦截器
         // 设置除登陆页面外，其他的都要先执行拦截器
-//        registry.addInterceptor(new TokenInterceptor())
-//                .addPathPatterns("/**")
-//                .excludePathPatterns("/member/login", "/member/register");
+        registry.addInterceptor(new TokenInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/member/login", "/member/register");
     }
 
     /**

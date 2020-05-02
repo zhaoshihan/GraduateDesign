@@ -77,7 +77,7 @@
 <!--        },-->
 <!--        computed:{-->
 <!--            getMemberID(){-->
-<!--                return this.$store.state.global.currentUser['id']-->
+<!--                return this.$store.state.global.hasCurrentUser['id']-->
 <!--            },-->
 <!--            productDictList () {-->
 <!--                return this.$store.getters.productDictList;-->

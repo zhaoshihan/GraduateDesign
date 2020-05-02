@@ -30,16 +30,16 @@ public class MemberServiceTest {
     @Test
     public void signTokenTest() {
         Member member = new Member();
-        member.setUsername("test_user_name");
+        member.setId(100);
 //        member.setPassword("123456");
         String token = memberService.signToken(member);
-        assertNotEquals(token, null);
+        assertNotEquals(null, token);
 
-        System.out.println("generate token = " + token);
+//        System.out.println("generate token = " + token);
 
-        String expected_token = TokenUtil.sign("test_user_name");
+        String expected_token = TokenUtil.sign(100);
 
-        assertEquals(token, expected_token);
+        assertEquals(expected_token, token);
     }
 
 

@@ -9,6 +9,6 @@ public interface IBookService {
 
     public List<Book> getAllBooks();
 
-//    public Map<String, Object> getReturnMapObject(List<Book> bookList);
+//    public Map<String, Object> getLoginReturnMap(List<Book> bookList);
 
 }

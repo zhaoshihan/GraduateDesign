@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/member")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:8080")
 public class MemberRestController {
     @Resource
     private IMemberService memberService;
@@ -26,12 +26,9 @@ public class MemberRestController {
 
             String token = memberService.signToken(member);
 
-            if (token != null) {
-                Map<String, Object> res = memberService.getReturnMapObject(member, token);
+            Map<String, Object> res = memberService.getLoginReturnMap(member, token);
 
-                return new ResponseEntity<>(res, HttpStatus.OK);
-            }
-            else return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         }
         else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -42,6 +39,19 @@ public class MemberRestController {
             return new ResponseEntity(HttpStatus.OK);
         }
         else return new ResponseEntity(HttpStatus.CONFLICT);
+    }
+
+    @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
+    public ResponseEntity getCurrentUser(@RequestHeader(value = "Authorization") String token) {
+        long userId = memberService.getUserIdFromToken(token);
+
+        Member member = memberService.getMemberById(userId);
+
+        if (member != null) {
+            Map<String, Object> res = memberService.getRegetUserReturnMap(member);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        }
+        else return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
 //    @RequestMapping(value="/query/{id}", method= RequestMethod.GET)

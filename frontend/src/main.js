@@ -27,7 +27,7 @@ Axios.interceptors.request.use(
     const token = localStorage.getItem('token')
     if (token) {
       // 如果token值不为空，则自动添加入request headers中
-      config.headers.Authorization = token
+      config.headers['Authorization'] = token
     }
     return config
   }, error => {
@@ -36,15 +36,15 @@ Axios.interceptors.request.use(
     return Promise.reject(error)
   }
 )
-Axios.interceptors.response.use(
-  config => {
-    return config
-  }, error => {
-    // 响应错误，以5xx状态码开头，表示服务端错误
-    console.warn(error)
-    return Promise.reject(error)
-  }
-)
+// Axios.interceptors.response.use(
+//   config => {
+//     return config
+//   }, error => {
+//     // 响应错误，以5xx状态码开头，表示服务端错误
+//     console.warn(error)
+//     return Promise.reject(error)
+//   }
+// )
 
 // 将Axios与Vue实例绑定
 Vue.prototype.$axios = Axios

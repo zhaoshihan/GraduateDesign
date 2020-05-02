@@ -6,9 +6,7 @@ import ssm.dao.entity.Book;
 import ssm.service.IBookService;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service("BookService")
 public class BookService implements IBookService {
@@ -26,7 +24,7 @@ public class BookService implements IBookService {
     }
 
 //    @Override
-//    public Map<String, Object> getReturnMapObject(List<Book> bookList) {
+//    public Map<String, Object> getLoginReturnMap(List<Book> bookList) {
 //        Map<String, Object> res = new HashMap<>();
 //
 //

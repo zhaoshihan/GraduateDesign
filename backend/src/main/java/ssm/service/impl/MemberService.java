@@ -6,9 +6,7 @@ import ssm.service.IMemberService;
 import ssm.util.TokenUtil;
 
 import javax.annotation.Resource;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
+
 
 //import org.json.JSONObject;
 import java.util.HashMap;
@@ -20,7 +18,7 @@ public class MemberService implements IMemberService {
     private IMemberDao memberDao;
 
     @Override
-    public Member getMemberById(int id) {
+    public Member getMemberById(long id) {
         return memberDao.getMemberById(id);
     }
 
@@ -38,27 +36,19 @@ public class MemberService implements IMemberService {
     @Override
     public String signToken(Member member) {
         if (member != null) {
-            String username = member.getUsername();
+            long userId = member.getId();
 
-            return TokenUtil.sign(username);
+            return TokenUtil.sign(userId);
         }
         return null;
     }
 
     @Override
-    public Map<String, Object> getReturnMapObject(Member member, String token) {
+    public Map<String, Object> getLoginReturnMap(Member member, String token) {
         Map<String, Object> res = new HashMap<>();
-        res.put("token", token);
 
-        Map<String, Object> user = new HashMap<>();
-        user.put("id", member.getId());
-        user.put("nickname", member.getNickname());
-        user.put("gender", member.getGender());
-        user.put("city", member.getCity());
-        user.put("address", member.getAddress());
-        user.put("phoneNumber", member.getPhoneNumber());
-        user.put("postcode", member.getPostcode());
-        user.put("email", member.getEmail());
+        res.put("token", token);
+        Map<String, Object> user = getRegetUserReturnMap(member);
 
         res.put("user", user);
 
@@ -79,11 +69,26 @@ public class MemberService implements IMemberService {
     }
 
     @Override
-    public String getUserNameFromToken(String token) {
+    public Map<String, Object> getRegetUserReturnMap(Member member) {
+        Map<String, Object> res = new HashMap<>();
+        res.put("id", member.getId());
+        res.put("nickname", member.getNickname());
+        res.put("gender", member.getGender());
+        res.put("city", member.getCity());
+        res.put("address", member.getAddress());
+        res.put("phoneNumber", member.getPhoneNumber());
+        res.put("postcode", member.getPostcode());
+        res.put("email", member.getEmail());
+
+        return res;
+    }
+
+    @Override
+    public long getUserIdFromToken(String token) {
         if (TokenUtil.verify(token)) {
-            return TokenUtil.getUserName(token);
+            return TokenUtil.getUserId(token);
         }
-        return null;
+        return -1;
     }
 
     @Override

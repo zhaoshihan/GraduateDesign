@@ -22,10 +22,10 @@ public class TokenUtil {
     /**
      * 生成签名，15min过期
      *
-     * @param username
+     * @param userId
      * @return
      */
-    public static String sign(String username) {
+    public static String sign(long userId) {
         try {
             long currentTimeMillis = System.currentTimeMillis();
             // 当前时间
@@ -41,7 +41,7 @@ public class TokenUtil {
             // 返回token字符串
             return JWT.create()
                     .withHeader(header)
-                    .withClaim("username", username)
+                    .withClaim("id", userId)
                     .withIssuer(ISSUER)
                     .withIssuedAt(currentTime)
                     .withExpiresAt(expireTime)
@@ -81,13 +81,13 @@ public class TokenUtil {
      * @param token
      * @return
      */
-    public static String getUserName(String token){
+    public static long getUserId(String token){
         try {
             DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("username").asString();
+            return jwt.getClaim("id").asLong();
         } catch (JWTDecodeException e){
             e.printStackTrace();
-            return null;
+            return -1;
         }
     }
 }

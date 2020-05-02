@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 自定义token拦截器
  */
-//@CrossOrigin(origins = "*")
 public class TokenInterceptor implements HandlerInterceptor {
 
     @Override

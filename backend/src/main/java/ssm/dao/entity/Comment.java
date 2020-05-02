@@ -1,50 +1,22 @@
 package ssm.dao.entity;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotNull;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comment {
+    @NotNull(message = "content属性不能为空")
     private String content;
+    @NotNull(message = "grade属性不能为空")
     private byte grade;
+    @NotNull(message = "bookID属性不能为空")
     private long bookID;
+    @NotNull(message = "memberID属性不能为空")
     private long memberID;
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public byte getGrade() {
-        return grade;
-    }
-
-    public void setGrade(byte grade) {
-        this.grade = grade;
-    }
-
-    public long getBookID() {
-        return bookID;
-    }
-
-    public void setBookID(long bookID) {
-        this.bookID = bookID;
-    }
-
-    public long getMemberID() {
-        return memberID;
-    }
-
-    public void setMemberID(long memberID) {
-        this.memberID = memberID;
-    }
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "content='" + content + '\'' +
-                ", grade=" + grade +
-                ", bookID=" + bookID +
-                ", memberID=" + memberID +
-                '}';
-    }
 }

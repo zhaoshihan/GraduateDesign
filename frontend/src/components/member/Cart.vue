@@ -84,10 +84,10 @@
 <!--                return this.$store.state.member.hasDiscount-->
 <!--            },-->
 <!--            getMemberID(){-->
-<!--                return this.$store.state.global.currentUser['id']-->
+<!--                return this.$store.state.global.hasCurrentUser['id']-->
 <!--            },-->
 <!--            getSendAddress(){-->
-<!--                return this.$store.state.global.currentUser['address']-->
+<!--                return this.$store.state.global.hasCurrentUser['address']-->
 <!--            },-->
 <!--            countAll () {-->
 <!--                let count = 0;-->

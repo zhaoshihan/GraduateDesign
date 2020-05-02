@@ -24,7 +24,8 @@
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <p class="subtitle">Welcome, {{nickname}}</p>
+        <p class="subtitle" v-cloak>Welcome, {{ nickname }}</p>
+
 <!--        <p class="subtitle">Welcome, </p>-->
       </div>
       <div class="navbar-item">
@@ -39,9 +40,19 @@
 <script>
   export default {
     name: 'Navbar',
+    mounted: function () {
+      if (!this.hasCurrentUser) {
+        this.$store.dispatch('regetUser')
+      }
+    },
     computed: {
+      hasCurrentUser: function () {
+        return this.$store.getters.hasCurrentUser
+      },
       nickname: function () {
-        return this.$store.getters.getNickname;
+        let user = this.$store.getters.getCurrentUser
+        if (user) return user['nickname']
+        else return ''
       }
     },
     methods: {

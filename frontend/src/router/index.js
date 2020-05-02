@@ -6,7 +6,8 @@ import store from '../store/index.js'
 // import Register from '../views/Register'
 // import Login from '../views/Login'
 
-// import store from '../store/user'
+// import MemberHome from '../views/MemberHome'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -40,6 +41,7 @@ const routes = [
       requireAuth: true
     },
     component: () => import('../views/MemberHome.vue')
+    // component: MemberHome
   },
   {
     path: '/ebook',
@@ -66,6 +68,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title
+
+  console.log('in router before each method: ' + from.path + ' ==>> ' + to.path)
   if (to.meta.requireAuth) {
     if (store.getters.isLoggedIn) {
       next()

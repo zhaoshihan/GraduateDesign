@@ -4,7 +4,7 @@ const user = {
   state: {
     status: '',
     token: localStorage.getItem('token') || '',
-    currentUser: {},
+    currentUser: null,
     // currentUser 结构: {
     //   id: null,
     //   nickname: null,
@@ -28,11 +28,25 @@ const user = {
     auth_error (state) {
       state.status = 'error'
     },
+    // reget_user (state) {
+    //
+    // },
+
+    reget_user_request (state) {
+      state.status = 'loading'
+    },
+    reget_user_success (state, payload) {
+      state.status = 'success'
+      state.currentUser = payload
+    },
+    reget_user_error (state) {
+      state.status = 'error'
+    },
     logout (state) {
       state.status = ''
       state.token = ''
-      state.currentUser = {}
-    },
+      state.currentUser = null
+    }
   },
   actions: {
     login ({ commit }, loginForm) {
@@ -52,7 +66,6 @@ const user = {
           // 使用localstorage存储而不是直接存储在Vuex中是为了浏览器刷新页面
           // 以及关闭后再打开页面还能正确登陆
           localStorage.setItem('token', token)
-          // localStorage.setItem('currentUser', user)
 
           // Add the following line:
           axios.defaults.headers.common['Authorization'] = token
@@ -64,7 +77,6 @@ const user = {
         }).catch(err => {
           commit('auth_error')
           localStorage.removeItem('token')
-          // localStorage.removeItem('currentUser')
           reject(err)
         })
       })
@@ -87,8 +99,26 @@ const user = {
         }).catch(err => {
           commit('auth_error', err)
           localStorage.removeItem('token')
-          // localStorage.removeItem('currentUser')
           reject(err)
+        })
+      })
+    },
+    // 这里使用同步请求数据的方法，必须等后端返回数据后，才能进行下一步的操作
+    regetUser ({ commit }) {
+      return new Promise( (resolve, reject) => {
+        commit('reget_user_request')
+        axios({
+          method: 'GET',
+          url: '/member/currentUser'
+        }).then(response => {
+          const user = response.data
+
+          commit('reget_user_success', user)
+          resolve(response)
+        }).catch(error => {
+          commit('reget_user_error')
+          localStorage.removeItem('token')
+          reject(error)
         })
       })
     },
@@ -96,7 +126,6 @@ const user = {
       return new Promise((resolve, reject) => {
         commit('logout')
         localStorage.removeItem('token')
-        // localStorage.removeItem('currentUser')
         delete axios.defaults.headers.common['Authorization']
         resolve()
       })
@@ -105,7 +134,9 @@ const user = {
   getters: {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
-    getNickname: state => state.currentUser['nickname']
+    hasCurrentUser: state => !!state.currentUser,
+    // getNickname: state => state.currentUser['nickname']
+    getCurrentUser: state => state.currentUser
   }
 }
 

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface IMemberService {
 
-    public Member getMemberById(int id);
+    public Member getMemberById(long id);
 
     public Member getMemberByUsername(String username);
 
@@ -13,9 +13,11 @@ public interface IMemberService {
 
     public String signToken(Member member);
 
-    public Map<String, Object> getReturnMapObject(Member member, String token);
+    public Map<String, Object> getLoginReturnMap(Member member, String token);
 
-    public String getUserNameFromToken(String token);
+    public Map<String, Object> getRegetUserReturnMap(Member member);
+
+    public long getUserIdFromToken(String token);
 
     public boolean addMember(Member member);
 
