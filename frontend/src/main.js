@@ -36,15 +36,24 @@ Axios.interceptors.request.use(
     return Promise.reject(error)
   }
 )
-// Axios.interceptors.response.use(
-//   config => {
-//     return config
-//   }, error => {
-//     // 响应错误，以5xx状态码开头，表示服务端错误
-//     console.warn(error)
-//     return Promise.reject(error)
-//   }
-// )
+Axios.interceptors.response.use(
+  config => {
+    return config
+  }, error => {
+    // 响应错误，以5xx状态码开头，表示服务端错误
+    console.warn(error)
+
+    console.log('in token interceptor')
+    console.log('error status = ' + error.status)
+    console.log('error config = ' + error.config)
+    if (error.status === 401 && error.config && !error.config.__isRetryRequest) {
+      alert('token interceptor: the token is expired!')
+      this.$store.dispatch('logout')
+    }
+
+    return Promise.reject(error)
+  }
+)
 
 // 将Axios与Vue实例绑定
 Vue.prototype.$axios = Axios

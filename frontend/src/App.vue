@@ -14,19 +14,19 @@ export default {
   name: 'App',
 
   created: function () {
-    this.$axios.interceptors.response.use(undefined, function (error) {
-      return new Promise(function (resolve, reject) {
-        // token过期时的处理, 触发logout action(在store/user.js中), 返回'/login'页面
-        console.log('in token interceptor')
-        console.log('error status = ' + error.status)
-        console.log('error config = ' + error.config)
-        if (error.status === 401 && error.config && !error.config.__isRetryRequest) {
-          alert('token interceptor: the token is expired!')
-          this.$store.dispatch('logout')
-        }
-        throw error;
-      });
-    });
+    // this.$axios.interceptors.response.use(undefined, function (error) {
+    //   return new Promise(function (resolve, reject) {
+    //     // token过期时的处理, 触发logout action(在store/user.js中), 返回'/login'页面
+    //     console.log('in token interceptor')
+    //     console.log('error status = ' + error.status)
+    //     console.log('error config = ' + error.config)
+    //     if (error.status === 401 && error.config && !error.config.__isRetryRequest) {
+    //       alert('token interceptor: the token is expired!')
+    //       this.$store.dispatch('logout')
+    //     }
+    //     throw error;
+    //   });
+    // });
   }
 
 }

@@ -118,6 +118,9 @@ const user = {
         }).catch(error => {
           commit('reget_user_error')
           localStorage.removeItem('token')
+          delete axios.defaults.headers.common['Authorization']
+
+          commit('logout')
           reject(error)
         })
       })
@@ -135,7 +138,6 @@ const user = {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
     hasCurrentUser: state => !!state.currentUser,
-    // getNickname: state => state.currentUser['nickname']
     getCurrentUser: state => state.currentUser
   }
 }

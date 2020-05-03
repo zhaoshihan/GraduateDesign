@@ -9,28 +9,28 @@
     <div id="navbarExampleTransparentExample" class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item" href="https://bulma.io/">
-          Home
+          主页
         </a>
 
         <a class="navbar-item" href="#">
-          Docs
+          文档
         </a>
 
         <a class="navbar-item" href="#">
-          Picture
+          图片
         </a>
       </div>
     </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
-        <p class="subtitle" v-cloak>Welcome, {{ nickname }}</p>
+        <p class="subtitle" v-cloak>欢迎你, {{ nickname }}</p>
 
 <!--        <p class="subtitle">Welcome, </p>-->
       </div>
       <div class="navbar-item">
         <a class="button is-primary">
-          <strong @click="logout">Log Out</strong>
+          <strong @click="logout">注销</strong>
         </a>
       </div>
     </div>
