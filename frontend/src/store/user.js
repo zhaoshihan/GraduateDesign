@@ -138,7 +138,7 @@ const user = {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
     hasCurrentUser: state => !!state.currentUser,
-    getCurrentUser: state => state.currentUser
+    currentUser: state => state.currentUser
   }
 }
 

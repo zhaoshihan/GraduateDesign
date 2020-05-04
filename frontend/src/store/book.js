@@ -20,25 +20,6 @@ const book = {
     bookList: [],
     currentBook: null
   },
-  getters: {
-    categories: state => {
-      const categories = state.bookList.map(item => item.category);
-      return getFilterArray(categories);
-    },
-    nations: state => {
-      const nations = state.bookList.map(item => item.nation);
-      return getFilterArray(nations);
-    },
-    bookDictList: state => {
-      const dict = {};
-      state.bookList.forEach(item => {
-        dict[item.id] = item;
-      });
-      return dict;
-    },
-    bookList: state => state.bookList,
-    currentBook: state => state.currentBook
-  },
   mutations: {
     booklist_request (state) {
       state.status = 'loading'
@@ -80,8 +61,26 @@ const book = {
         })
       })
     },
-
-  }
+  },
+  getters: {
+    categories: state => {
+      const categories = state.bookList.map(item => item.category);
+      return getFilterArray(categories);
+    },
+    nations: state => {
+      const nations = state.bookList.map(item => item.nation);
+      return getFilterArray(nations);
+    },
+    bookDictList: state => {
+      const dict = {};
+      state.bookList.forEach(item => {
+        dict[item.id] = item;
+      });
+      return dict;
+    },
+    bookList: state => state.bookList,
+    currentBook: state => state.currentBook
+  },
 }
 
 export default book

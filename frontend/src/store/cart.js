@@ -1,6 +1,5 @@
 const cart = {
   state: {
-    status: '',
     cartList: [],
     hasDiscount: false
   },
@@ -40,7 +39,8 @@ const cart = {
 
   },
   getters : {
-
+    cartList: state => state.cartList,
+    hasDiscount: state => state.hasDiscount
   }
 }
 

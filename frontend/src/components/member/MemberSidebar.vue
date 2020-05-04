@@ -8,7 +8,7 @@
                 <a>菜单栏</a>
                 <ul>
                     <li><a @click="chooseBookDisplay">书籍列表</a></li>
-<!--                    <li><a @click="chooseCart">购物车&nbsp;<span v-if="cartList.length" class="tag">{{cartList.length}}</span></a></li>-->
+                    <li><a @click="chooseCart">购物车&nbsp;<span v-if="cartList.length" class="tag">{{cartList.length}}</span></a></li>
 <!--                    <li><a @click="chooseOwnOrder">订单详情</a></li>-->
                 </ul>
             </li>

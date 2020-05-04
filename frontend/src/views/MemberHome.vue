@@ -25,7 +25,7 @@
 import Navbar from '../components/common/Navbar'
 import Sidebar from '../components/member/MemberSidebar'
 import BookDisplay from '../components/member/BookDisplay'
-// import Cart from '../components/member/Cart'
+import Cart from '../components/member/Cart'
 // import OwnOrder from '../components/member/OwnOrder'
 
 export default {
@@ -39,7 +39,7 @@ export default {
     Navbar,
     Sidebar,
     BookDisplay,
-    // Cart,
+    Cart,
     // OwnOrder,
   },
   data () {
@@ -61,18 +61,7 @@ export default {
     handleChangeBar (name) {
       this.currentView = name;
     },
-  },
-  // beforeCreate () {
-  //   if (!this.hasCurrentUser) {
-  //     this.$store.dispatch('regetUser')
-  //   }
-  //   // if (window.localStorage.token) {
-  //   //   this.token = window.localStorage.token
-  //   // }
-  //   // if (window.localStorage.userNickname) {
-  //   //   this.nickname = window.localStorage.nickname
-  //   // }
-  // }
+  }
 }
 </script>
 

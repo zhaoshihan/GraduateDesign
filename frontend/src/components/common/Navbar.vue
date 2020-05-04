@@ -50,7 +50,7 @@
         return this.$store.getters.hasCurrentUser
       },
       nickname: function () {
-        let user = this.$store.getters.getCurrentUser
+        let user = this.$store.getters.currentUser
         if (user) return user['nickname']
         else return ''
       }
