@@ -33,7 +33,7 @@ public class BookDaoTest {
     private static final String DATE_PATTERN = "dd/MM/yyyy";
 
     @Test
-    public void TestSelect() {
+    public void testSelect() {
         Book book = bookDao.getBookById(1);
 
         assertEquals("红楼梦", book.getBookname());
@@ -50,7 +50,7 @@ public class BookDaoTest {
     }
 
     @Test
-    public void TestSelectAll() {
+    public void testSelectAll() {
         List<Book> bookList = bookDao.getAllBooks();
 
         assertEquals(2, bookList.size());

@@ -76,7 +76,7 @@ public class TokenUtil {
     }
 
     /**
-     * 从token中获得用户名
+     * 从token中获得用户ID
      *
      * @param token
      * @return

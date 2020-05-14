@@ -1,28 +1,4 @@
 <template>
-<!--  <div class="register">-->
-<!--    <div id="nav">-->
-<!--      <router-link to="/login">Login</router-link> |-->
-<!--      <router-link to="/register">Register</router-link>-->
-<!--    </div>-->
-
-<!--    <p>Register Vue</p>-->
-<!--    <form :model="registerForm" v-on:submit.prevent>-->
-<!--      <label>Username:</label>-->
-<!--      <input type="text" v-model="registerForm.username" name="username" id="username">-->
-<!--      <br>-->
-<!--      <p>current username = {{registerForm.username}}</p>-->
-<!--      <label>Password:</label>-->
-<!--      <input type="password" v-model="registerForm.password" name="password" id="password">-->
-<!--      <br>-->
-<!--      <p>current password = {{registerForm.password}}</p>-->
-<!--      <label>Nickname:</label>-->
-<!--      <input type="text" v-model="registerForm.nickName" name="nickname" id="nickname">-->
-<!--      <br>-->
-<!--      <p>current nickname = {{registerForm.nickName}}</p>-->
-<!--      <button @click=register>Register</button>-->
-<!--    </form>-->
-<!--  </div>-->
-
   <section class="hero is-success is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
@@ -45,7 +21,7 @@
                          placeholder="Your username">
                   <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
                 </div>
-                <p>current username = {{registerForm.username}}</p>
+<!--                <p>current username = {{registerForm.username}}</p>-->
               </div>
 
               <div class="field">
@@ -55,7 +31,7 @@
                          placeholder="Your password">
                   <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
                 </div>
-                <p>current password = {{registerForm.password}}</p>
+<!--                <p>current password = {{registerForm.password}}</p>-->
               </div>
 
               <div class="field">
@@ -65,7 +41,7 @@
                          placeholder="Your nickname">
                   <span class="icon is-small is-left"><i class="fas fa-user-tag"></i></span>
                 </p>
-                <p>current nickname = {{registerForm.nickname}}</p>
+<!--                <p>current nickname = {{registerForm.nickname}}</p>-->
               </div>
 
               <div class="field">
@@ -80,7 +56,7 @@
                     女
                   </label>
                 </div>
-                <p>current gender = {{registerForm.gender}}</p>
+<!--                <p>current gender = {{registerForm.gender}}</p>-->
               </div>
 
               <div class="field">
@@ -90,7 +66,7 @@
                          placeholder="Your city">
                   <span class="icon is-small is-left"><i class="fas fa-city"></i></span>
                 </div>
-                <p>current city = {{registerForm.city}}</p>
+<!--                <p>current city = {{registerForm.city}}</p>-->
               </div>
 
               <div class="field">
@@ -100,7 +76,7 @@
                          placeholder="Your address">
                   <span class="icon is-small is-left"><i class="fas fa-road"></i></span>
                 </div>
-                <p>current address = {{registerForm.address}}</p>
+<!--                <p>current address = {{registerForm.address}}</p>-->
               </div>
 
               <div class="field">
@@ -110,7 +86,7 @@
                          placeholder="Your postcode">
                   <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
                 </div>
-                <p>current postcode = {{registerForm.postcode}}</p>
+<!--                <p>current postcode = {{registerForm.postcode}}</p>-->
               </div>
 
               <div class="field">
@@ -120,7 +96,7 @@
                          placeholder="Your phone number">
                   <span class="icon is-small is-left"><i class="fas fa-mobile-alt"></i></span>
                 </div>
-                <p>current phoneNumber = {{registerForm.phoneNumber}}</p>
+<!--                <p>current phoneNumber = {{registerForm.phoneNumber}}</p>-->
               </div>
 
               <div class="field">
@@ -130,7 +106,7 @@
                          placeholder="Your email">
                   <span class="icon is-small is-left"><i class="fas fa-at"></i></span>
                 </div>
-                <p>current email = {{registerForm.email}}</p>
+<!--                <p>current email = {{registerForm.email}}</p>-->
               </div>
 
               <button class="button is-block is-primary is-large is-fullwidth" @click="register">注册</button>
@@ -176,19 +152,6 @@ export default {
         .catch(() => {
           alert('register failed!')
         })
-
-      // console.log(this.registerForm)
-      //
-      // this.$axios({
-      //   method: 'post',
-      //   url: '/member/register',
-      //   data: this.registerForm
-      // }).then(() => {
-      //   alert('register success!')
-      //   this.$router.push('/login')
-      // }).catch(() => {
-      //   alert('register failed!')
-      // })
     }
   }
 }

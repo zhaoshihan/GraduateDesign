@@ -55,7 +55,7 @@ const book = {
 
           resolve(response)
         }).catch(error => {
-          commit('booklist_error', error)
+          commit('booklist_error')
 
           reject(error)
         })
@@ -79,6 +79,7 @@ const book = {
       return dict;
     },
     bookList: state => state.bookList,
+    hasBookList: state => state.bookList.length !== 0 || state.status === 'success',
     currentBook: state => state.currentBook
   },
 }

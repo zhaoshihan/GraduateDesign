@@ -2,7 +2,7 @@
     <nav class="panel">
         <p class="panel-heading">购物车清单</p>
 
-        <div class="panel-block">
+        <div class="panel-block" v-if="cartList.length">
             <div class="container table-container">
               <table class="table is-fullwidth">
                 <thead>
@@ -46,7 +46,7 @@
               <div class="level-left" v-if="!cartList.length">
                 <div class="level-item">
                   <div class="field">
-                    <label class="label" v-if="!cartList.length">购物车为空</label>
+                    <label class="label">购物车为空</label>
                   </div>
                 </div>
               </div>

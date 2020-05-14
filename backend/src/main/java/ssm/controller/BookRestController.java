@@ -20,7 +20,7 @@ public class BookRestController {
     private IBookService bookService;
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity getAllBooks() {
+    public ResponseEntity getBookList() {
         List<Book> bookList = bookService.getAllBooks();
 
         return new ResponseEntity<>(bookList, HttpStatus.OK);

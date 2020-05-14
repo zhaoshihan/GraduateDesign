@@ -1,4 +1,5 @@
 import axios from 'axios'
+import jwt from 'jwt-decode'
 
 const user = {
   state: {
@@ -28,10 +29,6 @@ const user = {
     auth_error (state) {
       state.status = 'error'
     },
-    // reget_user (state) {
-    //
-    // },
-
     reget_user_request (state) {
       state.status = 'loading'
     },
@@ -97,7 +94,7 @@ const user = {
           // commit('auth_success', token, user)
           resolve(resp)
         }).catch(err => {
-          commit('auth_error', err)
+          commit('auth_error')
           localStorage.removeItem('token')
           reject(err)
         })
@@ -138,7 +135,11 @@ const user = {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
     hasCurrentUser: state => !!state.currentUser,
-    currentUser: state => state.currentUser
+    currentUser: state => state.currentUser,
+    currentUserID: function (state) {
+      const tokenBody = jwt(state.token)
+      return tokenBody['id']
+    }
   }
 }
 

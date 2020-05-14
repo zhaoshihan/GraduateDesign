@@ -30,11 +30,6 @@ import Cart from '../components/member/Cart'
 
 export default {
   name: 'Home',
-  // beforeCreate () {
-  //   if (!this.hasCurrentUser) {
-  //     this.$store.dispatch('regetUser')
-  //   }
-  // },
   components: {
     Navbar,
     Sidebar,
@@ -42,10 +37,18 @@ export default {
     Cart,
     // OwnOrder,
   },
+  // 在页面组件中统一处理vuex的数据获取
+  mounted() {
+    // if (!this.hasCurrentUser) {
+    //   this.$store.dispatch('regetUser').then(() => {
+    //   })
+    // }
+    // if (!this.hasCommentList) {
+    //   this.$store.dispatch('getCommentListByUser', this.getCurrentUserID)
+    // }
+  },
   data () {
     return {
-      // token: '',
-      // nickname: ''
       currentView: 'BookDisplay'
     }
   },
@@ -53,9 +56,6 @@ export default {
     // isLoggedIn () {
     //   return this.$store.getters.isLoggedIn
     // },
-    hasCurrentUser () {
-      return this.$store.getters.hasCurrentUser
-    }
   },
   methods: {
     handleChangeBar (name) {

@@ -73,7 +73,7 @@
 
         <div class="selection">
             <div class="row columns is-multiline">
-                <BookCard v-for="item in filteredAndOrderedList" :info="item" :key="item.id"></BookCard>
+                <BookCard v-for="item in filteredAndOrderedList" :book-instance="item" :key="item.id"></BookCard>
             </div>
         </div>
     </div>
@@ -83,26 +83,38 @@
     import BookCard from './BookCard'
     export default {
         mounted () {
-            const booklist = this.$store.getters.bookList
-            if (Array.isArray(booklist) && booklist.length === 0) {
-              this.$store.dispatch('getBookList')
-            }
+          if (!this.hasBookList) {
+            this.$store.dispatch('getBookList')
+          }
+          if (!this.hasCommentList) {
+            this.$store.dispatch('getCommentListByUser', this.getCurrentUserID)
+          }
         },
         components: {
           BookCard
         },
         computed: {
+            hasCommentList () {
+              return this.$store.getters.hasCommentList
+            },
+            getCurrentUserID () {
+              // 直接通过token获得当前用户ID
+              return this.$store.getters.currentUserID
+            },
             bookList(){
-                return this.$store.getters.bookList;
+                return this.$store.getters.bookList
+            },
+            hasBookList () {
+              return this.$store.getters.hasBookList
             },
             categories () {
-                return this.$store.getters.categories;
+                return this.$store.getters.categories
             },
             nations () {
-                return this.$store.getters.nations;
+                return this.$store.getters.nations
             },
             filteredAndOrderedList () {
-                let list = [...this.bookList];
+                let list = [...this.bookList]
                 // 按书名搜索
                 if (this.certainBookName !== '') {
                   list = list.filter(item => item.bookname.includes(this.certainBookName))
@@ -110,19 +122,19 @@
 
                 // 按类型过滤
                 if (this.filterCategory !== '') {
-                    list = list.filter(item => item.category === this.filterCategory);
+                    list = list.filter(item => item.category === this.filterCategory)
                 }
                 // 按国家过滤
                 if (this.filterNation !== '') {
-                    list = list.filter(item => item.nation === this.filterNation);
+                    list = list.filter(item => item.nation === this.filterNation)
                 }
                 // 排序
                 if (this.order !== '') {
                     // 按价格排序
                     if (this.order === 'cost-desc') {
-                        list = list.sort((a, b) => b.price - a.price);
+                        list = list.sort((a, b) => b.price - a.price)
                     } else if (this.order === 'cost-asc') {
-                        list = list.sort((a, b) => a.price - b.price);
+                        list = list.sort((a, b) => a.price - b.price)
                     }
 
                     // 按评分排序
@@ -154,26 +166,26 @@
             handleFilterCategory (category) {
                 if (this.filterCategory === category) {
                     // 再次点击时，取消该过滤条件
-                    this.filterCategory = '';
+                    this.filterCategory = ''
                 } else {
-                    this.filterCategory = category;
+                    this.filterCategory = category
                 }
             },
             handleFilterNation (nation) {
                 if (this.filterNation === nation) {
-                    this.filterNation = '';
+                    this.filterNation = ''
                 } else {
-                    this.filterNation = nation;
+                    this.filterNation = nation
                 }
             },
             handleOrderDefault () {
-                this.order = '';
+                this.order = ''
             },
             handleOrderCost () {
                 if (this.order === 'cost-desc') {
-                    this.order = 'cost-asc';
+                    this.order = 'cost-asc'
                 } else {
-                    this.order = 'cost-desc';
+                    this.order = 'cost-desc'
                 }
             },
             handleOrderGrade () {

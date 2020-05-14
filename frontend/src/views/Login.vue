@@ -52,7 +52,7 @@
                          placeholder="Your username">
                   <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
                 </div>
-                <p>current username = {{loginForm.username}}</p>
+<!--                <p>current username = {{loginForm.username}}</p>-->
               </div>
 
               <div class="field">
@@ -62,21 +62,21 @@
                          placeholder="Your password">
                   <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
                 </div>
-                <p>current password = {{loginForm.password}}</p>
+<!--                <p>current password = {{loginForm.password}}</p>-->
               </div>
               <div class="field">
                 <label class="label has-text-left">登陆身份：</label>
                 <div class="control">
                   <label class="radio">
                     <input type="radio" v-model="loginForm.type" name="type" value="member">
-                    Member
+                    会员
                   </label>
                   <label class="radio">
                     <input type="radio" v-model="loginForm.type" name="type" value="administer">
-                    Administer
+                    管理员
                   </label>
                 </div>
-                <p>current type = {{loginForm.type}}</p>
+<!--                <p>current type = {{loginForm.type}}</p>-->
               </div>
 
               <button class="button is-block is-success is-large is-fullwidth" @click="login">登陆</button>
@@ -121,28 +121,10 @@ export default {
     }
   },
   methods: {
-    login: function () {
-      // let username = this.getUsername
-      // let password = this.getPassword
-
+    login () {
       this.$store.dispatch('login', this.loginForm)
         .then(() => this.$router.push('/home'))
 
-      // console.log(this.loginForm)
-      // this.$axios({
-      //   method: 'post',
-      //   url: '/member/login',
-      //   data: {
-      //     username: this.getUsername,
-      //     password: this.getPassword
-      //   }
-      // }).then(response => {
-      //   console.log(response.data)
-      //   // this.$store.commit('logIn', response.data)
-      //   window.localStorage.token = response.data.token
-      //   window.localStorage.nickname = response.data.nickname
-      //   this.$router.push('/home')
-      // })
     }
   }
 }

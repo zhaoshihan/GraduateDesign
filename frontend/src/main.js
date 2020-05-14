@@ -16,6 +16,7 @@ import 'bulma/css/bulma.min.css'
 
 import Axios from 'axios'
 import md5 from 'js-md5'
+import jwt from 'jwt-decode'
 
 // 为Axios进行统一的config设置
 Axios.defaults.baseURL = 'http://localhost:8081'
@@ -59,6 +60,9 @@ Axios.interceptors.response.use(
 Vue.prototype.$axios = Axios
 // 一般我们把登录和注册信息的密码进行加密
 Vue.prototype.$md5 = md5
+// 使用jwt-decode将Token还原为Object对象（json格式）
+Vue.prototype.$jwt = jwt
+
 Vue.config.productionTip = false
 
 new Vue({
