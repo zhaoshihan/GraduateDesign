@@ -34,7 +34,26 @@
         FROM
             comment
         WHERE
-            comment.book_id = #{userId}
+            comment.user_id = #{userId}
     </select>
+
+    <insert id="addComment" parameterType="ssm.dao.entity.Comment">
+        INSERT INTO
+            comment
+            (
+                content,
+                grade,
+                book_id,
+                user_id
+            )
+        VALUES
+            (
+                 #{comment.content},
+                 #{comment.grade},
+                 #{comment.bookID},
+                 #{comment.memberID}
+             )
+    </insert>
+
 
 </mapper>

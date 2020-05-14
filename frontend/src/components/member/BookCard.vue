@@ -16,32 +16,43 @@
 
                 <div class="media-content">
                   <div class="content">
-                    <p class="title is-4">{{info.bookname}}</p>
-                    <p class="subtitle is-6">[{{info.nation}}]&nbsp;&nbsp;{{info.author}}</p>
-                    <p class="is-size-4 has-text-weight-bold">¥ {{info.price}}</p>
+                    <p class="title is-4">{{bookInstance.bookname}}</p>
+                    <p class="subtitle is-6">[{{bookInstance.nation}}]&nbsp;&nbsp;{{bookInstance.author}}</p>
+                    <p class="is-size-4 has-text-weight-bold">¥ {{bookInstance.price}}</p>
                   </div>
                 </div>
 
                 <div class="media-right has-text-centered box">
-                  <strong class="is-size-4">{{info.averageGrade.toFixed(1)}}</strong>
-                  <StarRating :rating="gradeToRating" :increment="0.01"
+                  <strong class="is-size-4">{{gradeToRating.toFixed(1)}}</strong>
+                  <StarRating :rating="bookInstance.averageGrade" :increment="0.01"
                               :read-only="true" :star-size="16"
                               :show-rating="false"></StarRating>
-                  <p class="is-size-7">{{info.commentNumber}}位用户评价</p>
+                  <p class="is-size-7">{{bookInstance.commentNumber}}位用户评价</p>
                 </div>
               </div>
 
               <div class="content">
-                {{info.description}}
+                {{bookInstance.description}}
               </div>
 
               <div class="level">
-                  <div class="level-left level-item">
-                      <button class="button is-info" @click.prevent="jumpToEbook">阅读</button>
-<!--                    <ReaderModal :book-instance="info"></ReaderModal>-->
+                  <div class="level-item">
+                    <button class="button is-info" @click.prevent="jumpToEbook">阅读</button>
+<!--                    <ReaderModal :book-instance="bookInstance"></ReaderModal>-->
                   </div>
-                  <div class="level-right level-item">
-                      <button class="button is-success" @click.prevent="handleAddToCart">加入购物车</button>
+
+                  <div class="level-item" v-if="hasCurrentComment">
+<!--                    <button class="button is-danger">查看评论</button>-->
+                    <UpdateCommentModal :comment="getCurrentComment"></UpdateCommentModal>
+                  </div>
+
+                  <div class="level-item" v-else>
+<!--                    <button class="button is-warning">写评论</button>-->
+                    <AddCommentModal :book-instance="bookInstance"></AddCommentModal>
+                  </div>
+
+                  <div class="level-item">
+                    <button class="button is-success" @click.prevent="handleAddToCart">加入购物车</button>
                   </div>
               </div>
             </div>
@@ -50,40 +61,53 @@
 </template>
 
 <script>
-    // import detailModal from '../common/DetailsModal'
     import StarRating from 'vue-star-rating'
-    // import ReaderModal from './ReaderModal'
+    import AddCommentModal from './AddCommentModal'
+    import UpdateCommentModal from './UpdateCommentModal'
 
     export default {
         props: {
-            info: Object,
+            bookInstance: Object,
         },
         components:{
-          // detailModal,
+          AddCommentModal,
+          UpdateCommentModal,
           StarRating,
-          // ReaderModal
         },
         data () {
             return {
             }
         },
         computed: {
-          // 将averageGrade转化为5为单位的rating
+          hasCurrentComment () {
+            return this.$store.getters.hasComment(this.getCurrentUserID, this.getCurrentBookID)
+          },
+          getCurrentComment () {
+            return this.$store.getters.comment(this.getCurrentUserID, this.getCurrentBookID)
+          },
+          getCurrentUserID () {
+            const user = this.$store.getters.currentUser
+            return user['id']
+          },
+          getCurrentBookID () {
+            return this.bookInstance['id']
+          },
+          // 将averageGrade转化为10为单位的评分进行显示
           gradeToRating () {
-            return this.info.averageGrade / 2.0;
+            return this.bookInstance.averageGrade * 2.0;
           },
           // 生成封面png地址
           generatePictureURL () {
-            return '/static/images/' + this.info.bookname + '.jpg'
+            return '/static/images/' + this.bookInstance.bookname + '.jpg'
           }
         },
         methods: {
             // 加入购物车
             handleAddToCart () {
-                this.$store.commit('addCart', this.info.id)
+                this.$store.commit('addCart', this.bookInstance.id)
             },
             jumpToEbook () {
-              this.$store.commit('enter_current_book', this.info)
+              this.$store.commit('enter_current_book', this.bookInstance)
               this.$router.push('/ebook')
             }
         },
@@ -91,14 +115,4 @@
 </script>
 
 <style scoped>
-.custom-text {
-  font-weight: bold;
-  font-size: 1.9em;
-  border: 1px solid #cfcfcf;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 5px;
-  color: #999;
-  background: #fff;
-}
 </style>

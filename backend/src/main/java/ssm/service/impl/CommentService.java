@@ -22,4 +22,8 @@ public class CommentService implements ICommentService {
         return commentDao.getRelatedCommentsByUserId(userId);
     }
 
+    @Override
+    public boolean addComment(Comment comment) {
+        return commentDao.addComment(comment) > 0;
+    }
 }

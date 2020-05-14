@@ -11,4 +11,6 @@ public interface ICommentDao {
     Comment getCommentById(@Param("bookId") long bookId, @Param("userId") long userId);
 
     List<Comment> getRelatedCommentsByUserId(@Param("userId") long userId);
+
+    int addComment(@Param("comment") Comment comment);
 }
