@@ -7,9 +7,10 @@
 <!--                </figure>-->
 <!--            </div>-->
             <div class="card-content">
+
               <div class="media">
                 <div class="media-left">
-                  <figure class="image is-64x64">
+                  <figure class="image is-3by4" style="width: 96px">
                     <img :src="generatePictureURL" alt="Placeholder image">
                   </figure>
                 </div>
@@ -38,17 +39,18 @@
               <div class="level">
                   <div class="level-item">
                     <button class="button is-info" @click.prevent="jumpToEbook">阅读</button>
-<!--                    <ReaderModal :book-instance="bookInstance"></ReaderModal>-->
                   </div>
 
                   <div class="level-item" v-if="hasCurrentComment">
-<!--                    <button class="button is-danger">查看评论</button>-->
-                    <UpdateCommentModal :comment="getCurrentComment"></UpdateCommentModal>
+                    <UpdateCommentModal
+                      :picture-u-r-l="generatePictureURL"
+                      :book-instance="bookInstance"></UpdateCommentModal>
                   </div>
 
                   <div class="level-item" v-else>
-<!--                    <button class="button is-warning">写评论</button>-->
-                    <AddCommentModal :book-instance="bookInstance"></AddCommentModal>
+                    <AddCommentModal
+                      :picture-u-r-l="generatePictureURL"
+                      :book-instance="bookInstance"></AddCommentModal>
                   </div>
 
                   <div class="level-item">

@@ -9,11 +9,25 @@
           <p class="modal-card-title">查看您的评论</p>
 
 
-          <button class="button is-primary" @click="changeMode">{{getButtonMessage}}</button>
+          <a @click="changeMode">{{getButtonMessage}}</a>
 
           <button class="delete" aria-label="close" @click="cancelModal">></button>
         </header>
         <section class="modal-card-body">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-3by4" style="width: 64px;">
+                <img :src="pictureURL" alt="Placeholder image">
+              </figure>
+            </div>
+
+            <div class="media-content">
+              <div class="content">
+                <p class="title is-4">{{bookInstance.bookname}}</p>
+                <p class="subtitle is-6">[{{bookInstance.nation}}]&nbsp;&nbsp;{{bookInstance.author}}</p>
+              </div>
+            </div>
+          </div>
 
           <form v-if="!isEditMode" @submit.prevent>
             <div class="field">
@@ -38,21 +52,22 @@
               <div class="control">
                 <StarRating v-model="commentForm.grade" textClass="custom-text"></StarRating>
               </div>
-              <p>current grade = {{commentForm.grade}}</p>
+<!--              <p>current grade = {{commentForm.grade}}</p>-->
             </div>
 
             <div class="field">
               <label class="label">评论</label>
               <div class="control">
-                <textarea class="textarea" v-model="commentForm.content"
-                          placeholder="说说你读过之后的感受吧..."></textarea>
+              <textarea class="textarea" v-model="commentForm.content"
+                        placeholder="说说你读过之后的感受吧..."></textarea>
               </div>
-              <p>current content = {{commentForm.content}}</p>
+<!--              <p>current content = {{commentForm.content}}</p>-->
 
-              <p>current bookID = {{comment.bookID}}</p>
-              <p>current memberID = {{comment.memberID}}</p>
+<!--              <p>current bookID = {{bookID}}</p>-->
+<!--              <p>current memberID = {{memberID}}</p>-->
             </div>
           </form>
+
         </section>
         <footer class="modal-card-foot">
           <button class="button is-success" @click="okModal">提交</button>
@@ -70,7 +85,13 @@
     name: 'UpdateCommentModal',
     components: {StarRating},
     props: {
-      comment:Object
+      pictureURL: String,
+      bookInstance: Object,
+    },
+    mounted () {
+      this.initialize()
+      this.commentForm.content = this.comment.content
+      this.commentForm.grade = this.comment.grade
     },
     data () {
       return {
@@ -79,14 +100,20 @@
         isEditMode: false,
 
         commentForm: {
-          content: this.comment.content,
-          grade: this.comment.grade
+          content: undefined,
+          grade: undefined
         }
       }
     },
     computed: {
       getButtonMessage () {
         return this.isEditMode ? '切换查看' : '切换编辑'
+      },
+      getContent () {
+        return this.comment.content
+      },
+      getGrade () {
+        return this.comment.grade
       }
     },
     methods: {
@@ -113,6 +140,13 @@
       },
       changeMode () {
         this.isEditMode = !this.isEditMode;
+      },
+      initialize () {
+        // modal进行初始化，获得一些变量的值
+        this.memberID = this.$store.getters.currentUser['id']
+        this.bookID = this.bookInstance['id']
+
+        this.comment = this.$store.getters.comment(this.memberID, this.bookID)
       }
     }
   }

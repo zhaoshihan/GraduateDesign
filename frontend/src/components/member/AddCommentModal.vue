@@ -12,26 +12,42 @@
           <button class="delete" aria-label="close" @click="cancelModal">></button>
         </header>
         <section class="modal-card-body">
-          <form :model="commentForm" @submit.prevent>
-            <div class="field">
-              <label class="label">评分</label>
-              <div class="control">
-                <StarRating v-model="commentForm.grade" textClass="custom-text"></StarRating>
-              </div>
-              <p>current grade = {{commentForm.grade}}</p>
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-3by4" style="width: 64px;">
+                <img :src="pictureURL" alt="Placeholder image">
+              </figure>
             </div>
 
-            <div class="field">
-              <label class="label">评论</label>
-              <div class="control">
+            <div class="media-content">
+              <div class="content">
+                <p class="title is-4">{{bookInstance.bookname}}</p>
+                <p class="subtitle is-6">[{{bookInstance.nation}}]&nbsp;&nbsp;{{bookInstance.author}}</p>
+              </div>
+            </div>
+          </div>
+
+          <form :model="commentForm" @submit.prevent>
+              <div class="field">
+                <label class="label">评分</label>
+                <div class="control">
+                  <StarRating v-model="commentForm.grade" textClass="custom-text"></StarRating>
+                </div>
+<!--                <p>current grade = {{commentForm.grade}}</p>-->
+              </div>
+
+              <div class="field">
+                <label class="label">评论</label>
+                <div class="control">
                 <textarea class="textarea" v-model="commentForm.content"
                           placeholder="说说你读过之后的感受吧..."></textarea>
+                </div>
+<!--                <p>current content = {{commentForm.content}}</p>-->
+<!--                <p>current bookID = {{bookID}}</p>-->
+<!--                <p>current memberID = {{memberID}}</p>-->
               </div>
-              <p>current content = {{commentForm.content}}</p>
-              <p>current bookID = {{bookID}}</p>
-              <p>current memberID = {{memberID}}</p>
-            </div>
-          </form>
+            </form>
+
         </section>
         <footer class="modal-card-foot">
           <button class="button is-success" @click="okModal">提交</button>
@@ -49,8 +65,11 @@
     name: 'AddCommentModal',
     components: { StarRating },
     props: {
-      bookID: Number,
-      memberID: Number,
+      pictureURL: String,
+      bookInstance: Object
+    },
+    mounted () {
+      this.initialize()
     },
     data() {
       return {
@@ -82,7 +101,7 @@
           content: this.commentForm.content,
           grade: this.commentForm.grade,
           memberID: this.memberID,
-          bookID: this.bookID
+          bookID: this.bookInstance['id']
         }).then(() => {
             alert('add comment success')
           })
@@ -93,6 +112,11 @@
       cancelModal () {
         this.okPressed = false;
         this.showModalFlag = false;
+      },
+      initialize () {
+        // modal进行初始化，获得一些变量的值
+        this.memberID = this.$store.getters.currentUser['id']
+        this.bookID = this.bookInstance['id']
       }
     }
   }
